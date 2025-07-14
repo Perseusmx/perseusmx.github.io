@@ -220,10 +220,19 @@ $shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.2);
   
   .sidebar-toggle {
     display: flex;
+    position: fixed;
     top: 16px;
-    right: -20px;
-    width: 40px;
-    height: 40px;
+    left: 16px; // Position it on the left side for better visibility
+    width: 44px;
+    height: 44px;
+    background: rgba(33, 37, 41, 0.95);
+    border: 2px solid rgba(0, 255, 65, 0.3);
+    z-index: 1002; // Higher than sidebar
+  }
+  
+  // When sidebar is shown, hide the toggle button
+  .sidebar.force-show ~ .sidebar-toggle {
+    display: none;
   }
 }
 
