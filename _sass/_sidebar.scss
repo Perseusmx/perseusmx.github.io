@@ -1,0 +1,246 @@
+// Sidebar navigation - the collapsible menu on the left
+// Configuration variables
+$sidebar-width: 220px; // Made it smaller to fit text and icons better
+$sidebar-visible-width: 50px; // Shows just a sliver when collapsed
+$sidebar-bg: rgba(33, 37, 41, 0.95);
+$sidebar-text: var(--oc-green-9);
+$sidebar-text-muted: var(--oc-green-4);
+$sidebar-border: rgba(0, 255, 65, 0.15);
+$sidebar-hover: rgba(0, 255, 65, 0.1);
+$sidebar-active: rgba(0, 255, 65, 0.15);
+$sidebar-transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+$toggle-size: 44px;
+$toggle-bg: rgba(33, 37, 41, 0.9);
+$toggle-color: var(--oc-green-9);
+$toggle-border: rgba(0, 255, 65, 0.2);
+$shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+$shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.15);
+$shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.2);
+
+// The hamburger menu button for mobile
+.sidebar-toggle {
+  display: none;
+  position: absolute;
+  top: 24px;
+  right: -22px;
+  width: $toggle-size;
+  height: $toggle-size;
+  background: $toggle-bg;
+  border: 1px solid $toggle-border;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 1001;
+  align-items: center;
+  justify-content: center;
+  transition: $sidebar-transition;
+  backdrop-filter: blur(10px);
+  box-shadow: $shadow-light;
+  
+  svg {
+    color: $toggle-color;
+    transition: $sidebar-transition;
+  }
+  
+  &:hover {
+    background: rgba(33, 37, 41, 0.95);
+    border-color: $toggle-color;
+    box-shadow: $shadow-medium;
+    transform: translateY(-1px);
+    
+    svg {
+      transform: scale(1.1);
+    }
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Main sidebar container and navigation
+.sidebar {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  width: $sidebar-width;
+  transform: translateY(-50%) translateX(calc(-100% + #{$sidebar-visible-width}));
+  background: $sidebar-bg;
+  backdrop-filter: blur(20px);
+  border: 1px solid $sidebar-border;
+  border-radius: 0 12px 12px 0;
+  z-index: 1000;
+  transition: $sidebar-transition;
+  overflow: hidden;
+  box-shadow: $shadow-heavy;
+  height: auto;
+  max-height: 350px;
+  font-family: "hack", monospace;
+  
+  &:hover {
+    transform: translateY(-50%) translateX(0);
+    
+    .nav-link span {
+      opacity: 1 !important;
+      transform: translateX(0) !important;
+    }
+  }
+  
+  &.force-show {
+    transform: translateY(-50%) translateX(0);
+    
+    .nav-link span {
+      opacity: 1 !important;
+      transform: translateX(0) !important;
+    }
+  }
+  
+  .sidebar-content {
+    padding: 16px 0;
+    display: flex;
+    flex-direction: column;
+    width: $sidebar-width;
+  }
+  
+  .sidebar-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    
+    li {
+      margin: 0;
+      
+      .nav-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; // Icons go on the right, text in the middle
+        gap: 12px;
+        padding: 12px 16px;
+        color: $sidebar-text;
+        text-decoration: none;
+        transition: $sidebar-transition;
+        border-left: 3px solid transparent;
+        position: relative;
+        white-space: nowrap;
+        font-family: "hack", monospace;
+        font-size: 14px;
+        font-style: normal; // No italics here
+        
+        svg {
+          flex-shrink: 0;
+          color: $sidebar-text-muted;
+          transition: $sidebar-transition;
+          width: 18px;
+          height: 18px;
+          order: 2; // Icons stay on the right side
+        }
+        
+        span {
+          font-weight: 400;
+          font-style: normal; // No italics here either
+          letter-spacing: 0.3px;
+          opacity: 0;
+          transform: translateX(-8px);
+          transition: $sidebar-transition;
+          pointer-events: none;
+          order: 1; // Text goes on the left
+          color: $sidebar-text;
+          font-size: 14px;
+          text-align: center; // Center the text
+          flex: 1; // Use up the available space
+          margin: 0 auto; // Center it in that space
+        }
+        
+        &:hover {
+          background: $sidebar-hover;
+          border-left-color: $sidebar-text;
+          color: $sidebar-text;
+          
+          svg {
+            color: $sidebar-text;
+            transform: scale(1.05);
+          }
+        }
+        
+        &.active {
+          background: $sidebar-active;
+          border-left-color: $sidebar-text;
+          color: $sidebar-text;
+          
+          svg {
+            color: $sidebar-text;
+          }
+          
+          &::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid $sidebar-text;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Mobile and tablet styles
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: $sidebar-width;
+    height: 100vh;
+    transform: translateX(-100%);
+    border-radius: 0;
+    max-height: none;
+    
+    &:hover {
+      transform: translateX(-100%);
+    }
+    
+    &.collapsed {
+      transform: translateX(-100%);
+    }
+    
+    &.force-show {
+      transform: translateX(0);
+      
+      .nav-link span {
+        opacity: 1 !important;
+        transform: translateX(0) !important;
+      }
+    }
+  }
+  
+  .sidebar-toggle {
+    display: flex;
+    top: 16px;
+    right: -20px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+// Custom scrollbar for the sidebar
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: $sidebar-border;
+  border-radius: 2px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: $sidebar-text;
+} 

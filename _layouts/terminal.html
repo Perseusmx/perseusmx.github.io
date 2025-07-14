@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal - Perseus Blog</title>
+    <link rel="stylesheet" href="{{ '/assets/css/normalize.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/open-color.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/terminal.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/windows-monitor.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/kali-terminal.css' | relative_url }}">
+</head>
+<body class="terminal-page">
+    <!-- The navigation menu on the left -->
+    <nav id="sidebar" class="sidebar">
+        <!-- Hamburger menu button for mobile -->
+        <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        
+        <div class="sidebar-content">
+            <ul class="sidebar-nav">
+                <li><a href="/" class="nav-link">
+                    <span>Home</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                    </svg>
+                </a></li>
+                <li><a href="/blog" class="nav-link">
+                    <span>Blog</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                        <polyline points="14,2 14,8 20,8"></polyline>
+                    </svg>
+                </a></li>
+                <li><a href="/terminal" class="nav-link active">
+                    <span>Terminal</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4,17 10,11 4,5"></polyline>
+                        <line x1="12" y1="19" x2="20" y2="19"></line>
+                    </svg>
+                </a></li>
+                <li><a href="/about" class="nav-link">
+                    <span>About</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- The main area with the terminals -->
+    <main class="main-content">
+        <div class="terminal-container">
+            <!-- The Windows 98-style monitor -->
+            <div class="monitor windows-monitor">
+                <div class="monitor-frame">
+                    <div class="monitor-screen">
+                        <div class="desktop">
+                            <!-- The desktop icons -->
+                            <div class="desktop-icon" data-target="my-computer">
+                                <div class="icon-image">🖥️</div>
+                                <div class="icon-text">My Computer</div>
+                            </div>
+                            <div class="desktop-icon" data-target="recycle-bin">
+                                <div class="icon-image">🗑️</div>
+                                <div class="icon-text">Recycle Bin</div>
+                            </div>
+                            <div class="desktop-icon" data-target="network-neighborhood">
+                                <div class="icon-image">🌐</div>
+                                <div class="icon-text">Network Neighborhood</div>
+                            </div>
+                            <div class="desktop-icon" data-target="my-documents">
+                                <div class="icon-image">📁</div>
+                                <div class="icon-text">My Documents</div>
+                            </div>
+                        </div>
+
+                        <!-- The taskbar at the bottom -->
+                        <div class="taskbar">
+                            <div class="start-button" id="startButton">
+                                <span class="start-text">Start</span>
+                            </div>
+                            <div class="taskbar-items">
+                                <div class="taskbar-item">📁</div>
+                                <div class="taskbar-item">🌐</div>
+                            </div>
+                            <div class="system-tray">
+                                <div class="tray-item">🕐</div>
+                                <div class="tray-item">🔊</div>
+                            </div>
+                        </div>
+
+                        <!-- The start menu that pops up -->
+                        <div class="start-menu" id="startMenu">
+                            <div class="start-menu-header">
+                                <div class="user-info">
+                                    <div class="user-icon">👤</div>
+                                    <div class="user-name">Perseus</div>
+                                </div>
+                            </div>
+                            <div class="start-menu-content">
+                                <div class="menu-section">
+                                    <div class="menu-item" data-target="programs">
+                                        <span class="menu-icon">📁</span>
+                                        <span class="menu-text">Programs</span>
+                                    </div>
+                                    <div class="menu-item" data-target="documents">
+                                        <span class="menu-icon">📄</span>
+                                        <span class="menu-text">Documents</span>
+                                    </div>
+                                    <div class="menu-item" data-target="settings">
+                                        <span class="menu-icon">⚙️</span>
+                                        <span class="menu-text">Settings</span>
+                                    </div>
+                                    <div class="menu-item" data-target="find">
+                                        <span class="menu-icon">🔍</span>
+                                        <span class="menu-text">Find</span>
+                                    </div>
+                                    <div class="menu-item" data-target="help">
+                                        <span class="menu-icon">❓</span>
+                                        <span class="menu-text">Help</span>
+                                    </div>
+                                    <div class="menu-item" data-target="run">
+                                        <span class="menu-icon">▶️</span>
+                                        <span class="menu-text">Run...</span>
+                                    </div>
+                                </div>
+                                <div class="menu-section">
+                                    <div class="menu-item shutdown" data-target="shutdown">
+                                        <span class="menu-icon">⏹️</span>
+                                        <span class="menu-text">Shut Down...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- The programs submenu -->
+                        <div class="programs-menu" id="programsMenu">
+                            <div class="menu-section">
+                                <div class="menu-category">
+                                    <div class="category-header">Games</div>
+                                    <div class="menu-item" data-target="solitaire">
+                                        <span class="menu-icon">🃏</span>
+                                        <span class="menu-text">Solitaire</span>
+                                    </div>
+                                    <div class="menu-item" data-target="minesweeper">
+                                        <span class="menu-icon">💣</span>
+                                        <span class="menu-text">Minesweeper</span>
+                                    </div>
+                                    <div class="menu-item" data-target="paint">
+                                        <span class="menu-icon">🎨</span>
+                                        <span class="menu-text">Paint</span>
+                                    </div>
+                                </div>
+                                <div class="menu-category">
+                                    <div class="category-header">Accessories</div>
+                                    <div class="menu-item" data-target="notepad">
+                                        <span class="menu-icon">📝</span>
+                                        <span class="menu-text">Notepad</span>
+                                    </div>
+                                    <div class="menu-item" data-target="calculator">
+                                        <span class="menu-icon">🧮</span>
+                                        <span class="menu-text">Calculator</span>
+                                    </div>
+                                    <div class="menu-item" data-target="wordpad">
+                                        <span class="menu-icon">📄</span>
+                                        <span class="menu-text">WordPad</span>
+                                    </div>
+                                </div>
+                                <div class="menu-category">
+                                    <div class="category-header">Security Tools</div>
+                                    <div class="menu-item" data-target="nmap">
+                                        <span class="menu-icon">🔍</span>
+                                        <span class="menu-text">Nmap</span>
+                                    </div>
+                                    <div class="menu-item" data-target="wireshark">
+                                        <span class="menu-icon">📡</span>
+                                        <span class="menu-text">Wireshark</span>
+                                    </div>
+                                    <div class="menu-item" data-target="metasploit">
+                                        <span class="menu-icon">⚔️</span>
+                                        <span class="menu-text">Metasploit</span>
+                                    </div>
+                                </div>
+                                <div class="menu-category">
+                                    <div class="category-header">System</div>
+                                    <div class="menu-item" data-target="control-panel">
+                                        <span class="menu-icon">⚙️</span>
+                                        <span class="menu-text">Control Panel</span>
+                                    </div>
+                                    <div class="menu-item" data-target="explorer">
+                                        <span class="menu-icon">📁</span>
+                                        <span class="menu-text">Windows Explorer</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Kali Linux terminal -->
+            <div class="monitor kali-monitor">
+                <div class="monitor-frame">
+                    <div class="monitor-screen">
+                        <div class="terminal">
+                            <div class="terminal-header">
+                                <div class="terminal-buttons">
+                                    <span class="terminal-button minimize"></span>
+                                    <span class="terminal-button maximize"></span>
+                                    <span class="terminal-button close"></span>
+                                </div>
+                                <div class="terminal-title">root@kali:~#</div>
+                            </div>
+                            <div class="terminal-content" id="terminalContent">
+                                <!-- The terminal output area -->
+                                
+                                <!-- Where you type commands -->
+                                <div class="terminal-input">
+                                    <span class="prompt">root@kali:~#</span>
+                                    <input type="text" class="input-field" placeholder="Type a command..." autocomplete="off">
+                                    <span class="cursor"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- The little explanation box at the bottom -->
+        <div class="terminal-explanation">
+            <div class="explanation-content">
+                <p>This is a fun side project featuring interactive terminal simulations. The Windows 98-style interface and Kali Linux terminal are purely for entertainment and demonstration purposes. Both terminals include realistic command outputs and achievements to make the experience more engaging. This is a work in progress - more features and commands are being added regularly!</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- The footer at the bottom -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; {{ 'now' | date: "%Y" }} Perseus. Some rights reserved. Built with <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> and powered by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>. Theme heavily modified from <a href="https://github.com/piazzai/hacked-jekyll" target="_blank">hacked-jekyll</a>.</p>
+        </div>
+    </footer>
+
+    <script src="{{ '/assets/js/windows-monitor.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/kali-terminal.js' | relative_url }}"></script>
+    
+    <script>
+        // Handle the sidebar menu on mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.getElementById('sidebar-toggle');
+            const mainContent = document.querySelector('.main-content');
+            
+            // Handle the hamburger menu clicks
+            toggle.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    // On mobile, show/hide the menu
+                    sidebar.classList.toggle('collapsed');
+                    mainContent.classList.toggle('expanded');
+                } else {
+                    // On desktop, just show it temporarily
+                    sidebar.classList.toggle('force-show');
+                }
+            });
+            
+            // Close the menu when clicking outside on mobile
+            document.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+                        sidebar.classList.add('collapsed');
+                        mainContent.classList.add('expanded');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

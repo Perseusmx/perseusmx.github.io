@@ -1,0 +1,35 @@
+// My custom styles for the blog
+// 
+
+// The little explanation box at the bottom of the terminal page
+.terminal-explanation {
+  margin-top: 40px;
+  padding: 20px;
+  background: rgba(0, 255, 0, 0.05);
+  border: 1px solid rgba(0, 255, 0, 0.2);
+  border-radius: 8px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  .explanation-content {
+    p {
+      margin: 0;
+      font-family: "hack", monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--oc-green-4);
+      text-align: center;
+      
+      a {
+        color: var(--oc-green-5);
+        text-decoration: none;
+        transition: color 0.2s ease;
+        
+        &:hover {
+          color: var(--oc-green-3);
+        }
+      }
+    }
+  }
+}

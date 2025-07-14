@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Where the sitemap is located
+Sitemap: https://perseusmx.github.io/sitemap.xml
+
+# Don't let search engines see these folders
+Disallow: /_site/
+Disallow: /_layouts/
+Disallow: /_posts/
+Disallow: /_sass/
+Disallow: /_theme/ 

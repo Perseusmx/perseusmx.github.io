@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ site.title }}</title>
+
+{% seo title=false %}
+  <link rel="icon" type="image/x-icon" href="{{ 'assets/favicon.ico' | relative_url }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ 'assets/apple-touch-icon.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'assets/favicon-32x32.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ 'assets/favicon-16x16.png' | relative_url }}">
+  <link rel="manifest" href="{{ 'assets/site.webmanifest' | relative_url }}">
+  <link rel="stylesheet" href="{{ 'assets/css/normalize.css' | relative_url }}" />
+  <link rel="stylesheet" href="{{ 'assets/css/open-color.css' | relative_url }}" />
+  <link rel="stylesheet" href="{{ 'assets/css/styles.css' | relative_url }}" />
+  <script src="{{ 'assets/js/typed.umd.js' | relative_url }}"></script>
+</head>
+
+<body>
+  <!-- The navigation menu on the left -->
+  <nav id="sidebar" class="sidebar">
+    <!-- Hamburger menu button for mobile -->
+    <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle navigation">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+    
+    <div class="sidebar-content">
+      <ul class="sidebar-nav">
+        <li><a href="/" class="nav-link">
+          <span>Home</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9,22 9,12 15,12 15,22"></polyline>
+          </svg>
+        </a></li>
+        <li><a href="/blog" class="nav-link">
+          <span>Blog</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+            <polyline points="14,2 14,8 20,8"></polyline>
+          </svg>
+        </a></li>
+        <li><a href="/terminal" class="nav-link">
+          <span>Terminal</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4,17 10,11 4,5"></polyline>
+            <line x1="12" y1="19" x2="20" y2="19"></line>
+          </svg>
+        </a></li>
+        <li><a href="/about" class="nav-link">
+          <span>About</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- The main content area -->
+  <main class="main-content">
+    {{ content }}
+  </main>
+
+  <!-- The footer at the bottom -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; {{ 'now' | date: "%Y" }} Perseus. Some rights reserved. Built with <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> and powered by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>. Theme heavily modified from <a href="https://github.com/piazzai/hacked-jekyll" target="_blank">hacked-jekyll</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Handle the sidebar menu on mobile
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidebar = document.getElementById('sidebar');
+      const toggle = document.getElementById('sidebar-toggle');
+      const mainContent = document.querySelector('.main-content');
+      
+      // Handle the hamburger menu clicks
+      toggle.addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+          // On mobile, show/hide the menu
+          sidebar.classList.toggle('collapsed');
+          mainContent.classList.toggle('expanded');
+        } else {
+          // On desktop, just show it temporarily
+          sidebar.classList.toggle('force-show');
+        }
+      });
+      
+      // Close the menu when clicking outside on mobile
+      document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+          if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+            sidebar.classList.add('collapsed');
+            mainContent.classList.add('expanded');
+          }
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

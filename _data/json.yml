@@ -1,0 +1,68 @@
+- key: Name
+  value: Perseus
+- key: Focus
+  value:
+    - "Penetration Testing"
+    - "A2P SMS Fraud Prevention"
+    - "SIM Box Fraud Detection"
+    - "SIM Swap Prevention"
+    - "Red Team Operations"
+    - "Grey Route Analysis"
+    - "Telecom Security Testing"
+    - "OSINT & Threat Intelligence"
+    - "Network Security"
+    - "Mobile Security Testing"
+    - "API Security Assessment"
+    - "Social Engineering"
+    - "IoT Security Assessment"
+  typed: true
+- key: Location
+  value: "Remote | Global"
+- key: Contact
+  value:
+    - key: Email
+      value: p3rseus@mailbox.org
+      url: "mailto:p3rseus@mailbox.org"
+    - key: GitHub
+      value: github.com/perseusmx
+      url: https://github.com/perseusmx
+    - key: TryHackMe
+      value: tryhackme.com/p/perseus5
+      url: https://tryhackme.com/p/perseus5
+
+- key: Tech
+  value:
+    - "Burp Suite"
+    - "Metasploit"
+    - "Wireshark"
+    - "Kali Linux"
+    - "Python"
+    - "Bash"
+    - "PowerShell"
+    - "Nmap"
+    - "Netcat"
+    - "OWASP ZAP"
+    - "Nessus"
+    - "Splunk"
+    - "QRadar"
+    - "OpenVAS"
+    - "Docker"
+    - "Cobalt Strike"
+    - "BloodHound"
+    - "Hashcat"
+    - "SQLMap"
+    - "Nuclei"
+    - "Shodan"
+    - "Maltego"
+    - "Recon-ng"
+    - "Amass"
+    - "FFuf"
+    - "RustScan"
+    - "BeEF"
+    - "Mimikatz"
+    - "Volatility"
+    - "Elastic"
+    - "Jenkins"
+    - "GitHub Actions"
+    - "Snyk"
+  typed: true 

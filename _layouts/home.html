@@ -1,0 +1,123 @@
+---
+layout: default
+---
+
+{% case site.quotes -%}
+{% when 'keys' -%}
+{% assign quote_key = '"' -%}
+{% assign quote_value = '' -%}
+{% when 'values' -%}
+{% assign quote_key = '' -%}
+{% assign quote_value = '"' -%}
+{% when false -%}
+{% assign quote_key = '' -%}
+{% assign quote_value = '' -%}
+{% else -%}
+{% assign quote_key = '"' -%}
+{% assign quote_value = '"' -%}
+{% endcase -%}
+
+{% if site.commas == false -%}
+{% assign comma = '' -%}
+{% else -%}
+{% assign comma = ',' -%}
+{% endif -%}
+
+{% if site.newtab == true -%}
+{% assign tab = '_blank' -%}
+{% else -%}
+{% assign tab = '_self' -%}
+{% endif -%}
+
+<div id="json">
+  {% for pair in site.data.json %}
+  <div class="my ms">
+    {% if pair.typed -%}
+    {{ quote_key }}<span class="key">{{ pair.key }}</span>{{ quote_key }}:
+    {{ quote_value }}<span class="value"><span id="typed-{{ pair.key | downcase | replace: ' ', '-' }}"></span></span>{{ quote_value }}
+    <script>
+      // Inline script to get the strings for this specific element
+      (function() {
+        const strings = [
+          {% for value in pair.value -%}
+          "{{ value }}"{% unless forloop.last %},{% endunless %}
+          {%- endfor %}
+        ];
+        
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+        
+        // Create shuffled strings array
+        const shuffledStrings = shuffleArray([...strings]);
+        
+        new Typed("#typed-{{ pair.key | downcase | replace: ' ', '-' }}", {
+          strings: shuffledStrings,
+          backSpeed: 10,
+          typeSpeed: 30,
+          backDelay: 1000,
+          loop: true,
+          smartBackspace: true,
+        });
+      })();
+    </script>
+    {%- elsif pair.value.first.key -%}
+    {{ quote_key }}<span class="key">{{ pair.key }}</span>{{ quote_key }}: [
+    {% for value in pair.value -%}
+    {% if value.url -%}
+    <p class="ms">
+      {{ quote_key }}<span class="key">{{ value.key }}</span>{{ quote_key }}:
+      {{ quote_value }}<a class="value" href="{{ value.url | relative_url }}" target="{{ tab }}">{{ value.value }}</a>{{ quote_value }}
+      {%- unless forloop.last -%}
+      {{ comma }}
+      {%- endunless %}
+    </p>
+    {% else -%}
+    <p class="ms">
+      {{ quote_key }}<span class="key">{{ value.key }}</span>{{ quote_key }}:
+      {{ quote_value }}<span class="value">{{ value.value }}</span>{{ quote_value }}
+      {%- unless forloop.last -%}
+      {{ comma }}
+      {%- endunless %}
+    </p>
+    {% endif -%}
+    {%- endfor -%}
+    ]
+    {%- elsif pair.value.first -%}
+    {{ quote_key }}<span class="key">{{ pair.key }}</span>{{ quote_key }}: [
+    {% for value in pair.value -%}
+    {% if value.url -%}
+    <p class="ms">
+      {{ quote_value }}<a class="value" href="{{ value.url | relative_url }}" target="{{ tab }}">{{ value.value }}</a>{{ quote_value }}
+      {%- unless forloop.last -%}
+      {{ comma }}
+      {%- endunless %}
+    </p>
+    {% else -%}
+    <p class="ms">
+      {{ quote_value }}<span class="value">{{ value }}</span>{{ quote_value }}
+      {%- unless forloop.last -%}
+      {{ comma }}
+      {%- endunless %}
+    </p>
+    {% endif -%}
+    {%- endfor -%}
+    ]
+    {%- elsif pair.url -%}
+    {{ quote_key }}<span class="key">{{ pair.key }}</span>{{ quote_key }}:
+    {{ quote_value }}<a class="value" href="{{ pair.url | relative_url }}" target="{{ tab }}">{{ pair.value }}</a>{{ quote_value }}
+    {%- else -%}
+    {{ quote_key }}<span class="key">{{ pair.key }}</span>{{ quote_key }}:
+    {{ quote_value }}<span class="value">{{ pair.value }}</span>{{ quote_value }}
+    {%- endif -%}
+    {%- unless forloop.last -%}
+    {{ comma }}
+    {%- endunless %}
+  </div>
+  {% endfor %}
+</div>

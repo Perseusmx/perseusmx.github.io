@@ -1,0 +1,312 @@
+---
+layout: default
+---
+
+<div class="error-container">
+  <div class="terminal-error">
+    <div class="error-header">
+      <span class="prompt">root@kali:~#</span>
+      <span class="command">find /page -name "{{ page.url }}"</span>
+    </div>
+    
+    <div class="error-output">
+      <div class="error-line">
+        <span class="corruption-text" id="corruption-text">ERROR 404: PAGE_NOT_FOUND</span>
+      </div>
+      <div class="error-line">Status: <span class="status-fail">TARGET_MISSING</span></div>
+      <div class="error-line">Access: <span class="status-fail">DENIED</span></div>
+      <div class="error-line">Location: <span class="path">{{ page.url }}</span></div>
+      <div class="error-line">Timestamp: <span class="timestamp">{{ 'now' | date: "%Y-%m-%d %H:%M:%S" }}</span></div>
+    </div>
+    
+    <div class="error-suggestions">
+      <div class="suggestion-header">Available Commands:</div>
+      <div class="suggestion-list">
+        <a href="/" class="suggestion-link">cd /home</a>
+        <a href="/blog" class="suggestion-link">ls /blog</a>
+        <a href="/terminal" class="suggestion-link">./terminal</a>
+        <a href="/about" class="suggestion-link">cat /about</a>
+      </div>
+    </div>
+    
+    <div class="error-footer">
+      <span class="prompt">root@kali:~#</span>
+      <span class="cursor"></span>
+    </div>
+  </div>
+</div>
+
+<style>
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 2rem;
+  font-family: 'Courier New', monospace;
+  position: relative;
+  overflow: hidden;
+}
+
+.terminal-error {
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid var(--green);
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.error-header {
+  margin-bottom: 1.5rem;
+  color: var(--green);
+}
+
+.error-header .prompt {
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.error-header .command {
+  opacity: 0.8;
+}
+
+.error-output {
+  margin-bottom: 2rem;
+}
+
+.error-line {
+  color: var(--green);
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.status-fail {
+  color: #ff4444;
+  font-weight: bold;
+  animation: corruption-red 3s infinite;
+}
+
+.path {
+  color: #ffaa00;
+  font-style: italic;
+}
+
+.timestamp {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.error-suggestions {
+  border-top: 1px solid var(--green);
+  padding-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.suggestion-header {
+  color: var(--green);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.suggestion-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.suggestion-link {
+  color: var(--green);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--green);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.suggestion-link:hover {
+  background: var(--green);
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 255, 0, 0.3);
+}
+
+.error-footer {
+  color: var(--green);
+  display: flex;
+  align-items: center;
+}
+
+.error-footer .prompt {
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.cursor {
+  width: 8px;
+  height: 16px;
+  background: var(--green);
+  animation: blink 1s infinite;
+}
+
+/* Text Corruption Effects */
+.corruption-text {
+  color: #00ff00;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+@keyframes corruption-red {
+  0%, 100% { 
+    color: #ff4444;
+    content: "TARGET_MISSING";
+  }
+  25% { 
+    color: #ff0000;
+    content: "T@RGET_MISSING";
+  }
+  50% { 
+    color: #cc0000;
+    content: "TARGET_MISSING";
+  }
+  75% { 
+    color: #ff6666;
+    content: "T@RGET_MISSING";
+  }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .terminal-error {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  
+  .suggestion-list {
+    flex-direction: column;
+  }
+  
+  .error-line {
+    font-size: 1rem;
+  }
+  
+  .corruption-text {
+    font-size: 1.1rem;
+  }
+}
+
+@keyframes artifact-fade {
+  0% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.2); }
+}
+</style>
+
+<script>
+// Character substitution map for corruption
+const corruptionMap = {
+  'A': ['@', '4', 'Д', '∀'],
+  'B': ['8', 'ß', 'β', 'в'],
+  'C': ['(', '¢', '©', 'с'],
+  'D': ['Ð', 'ð', '∂', 'д'],
+  'E': ['3', '€', 'є', 'е'],
+  'F': ['ƒ', 'ф', 'f'],
+  'G': ['6', '9', 'g'],
+  'H': ['#', 'н', 'н'],
+  'I': ['1', '!', '|', 'і'],
+  'J': ['j', 'ј', 'j'],
+  'K': ['к', 'k', 'k'],
+  'L': ['£', 'ł', 'l'],
+  'M': ['м', 'm', 'm'],
+  'N': ['и', 'n', 'n'],
+  'O': ['0', 'о', 'о'],
+  'P': ['р', 'p', 'p'],
+  'Q': ['q', 'q', 'q'],
+  'R': ['я', 'r', 'r'],
+  'S': ['$', '5', 'ѕ', 's'],
+  'T': ['7', 'т', 't'],
+  'U': ['υ', 'u', 'u'],
+  'V': ['ν', 'v', 'v'],
+  'W': ['ш', 'w', 'w'],
+  'X': ['×', 'х', 'x'],
+  'Y': ['у', 'y', 'y'],
+  'Z': ['z', 'z', 'z'],
+  ' ': [' ', '_', '-', '·']
+};
+
+
+
+function corruptText(text) {
+  let corrupted = '';
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i].toUpperCase();
+    if (Math.random() < 0.15) { // 15% chance to corrupt each character
+      if (corruptionMap[char]) {
+        corrupted += corruptionMap[char][Math.floor(Math.random() * corruptionMap[char].length)];
+      } else {
+        corrupted += text[i];
+      }
+    } else {
+      corrupted += text[i];
+    }
+  }
+  return corrupted;
+}
+
+
+
+// Initialize corruption
+document.addEventListener('DOMContentLoaded', function() {
+  const corruptionText = document.getElementById('corruption-text');
+  if (!corruptionText) return;
+  
+  const originalText = corruptionText.textContent;
+  
+  // Update corrupted text every 200ms for faster effect
+  setInterval(() => {
+    const corrupted = corruptText(originalText);
+    corruptionText.textContent = corrupted;
+  }, 200);
+  
+  // Add random corruption artifacts across the page
+  setInterval(() => {
+    const container = document.querySelector('.error-container');
+    if (!container) return;
+    
+    const artifact = document.createElement('div');
+    artifact.style.cssText = `
+      position: absolute;
+      top: ${Math.random() * 80 + 10}%;
+      left: ${Math.random() * 80 + 10}%;
+      color: #00ff00;
+      font-size: ${Math.random() * 15 + 8}px;
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 5;
+      font-family: 'Courier New', monospace;
+      animation: artifact-fade ${Math.random() * 2 + 1}s ease-out forwards;
+    `;
+    
+    // Random corruption characters
+    const chars = ['█', '▓', '▒', '░', '▄', '▌', '▐', '▀', '▬', '▭', '▮', '▯', '▰', '▱', '▲', '△', '▴', '▵', '▶', '▷', '▸', '▹', '►', '▻', '▼', '▽', '▾', '▿', '◀', '◁', '◂', '◃', '◄', '◅', '◆', '◇', '◈', '◉', '◊', '○', '◌', '◍', '◎', '●', '◐', '◑', '◒', '◓', '◔', '◕', '◖', '◗', '◘', '◙', '◚', '◛', '◜', '◝', '◞', '◟', '◠', '◡', '◢', '◣', '◤', '◥', '◦', '◧', '◨', '◩', '◪', '◫', '◬', '◭', '◮', '◯', '◰', '◱', '◲', '◳', '◴', '◵', '◶', '◷', '◸', '◹', '◺', '◻', '◼', '◽', '◾', '◿'];
+    artifact.textContent = chars[Math.floor(Math.random() * chars.length)];
+    
+    container.appendChild(artifact);
+    
+    // Remove artifact after animation
+    setTimeout(() => {
+      if (artifact.parentNode) {
+        artifact.parentNode.removeChild(artifact);
+      }
+    }, 3000);
+  }, 800);
+});
+</script>

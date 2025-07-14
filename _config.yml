@@ -1,0 +1,35 @@
+title: Perseus Blog
+description: Penetration Tester specializing in Telecommunications Security and Fraud Prevention
+baseurl: ""
+url: "https://perseusmx.github.io"
+
+# Use local theme instead of gem
+theme: null
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Sitemap configuration
+sitemap:
+  changefreq: weekly
+  priority: 0.8
+  exclude:
+    - /404.html
+    - /robots.txt
+    - /sitemap.xml
+  include_posts: true
+  include_pages: true
+
+sass:
+  sourcemap: never
+
+# JSON display customization
+color_bg: gray-9
+color_punct: green-7
+color_key: green-4
+color_value: green-5
+color_hover: green-3
+quotes: true
+commas: true
+lowercase: true
+newtab: false 

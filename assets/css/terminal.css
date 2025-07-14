@@ -1,0 +1,454 @@
+/* The terminal page styles - retro multi-monitor setup */
+
+/* Only apply these styles when on the terminal page */
+.terminal-page {
+  background: #333 !important;
+  overflow-x: hidden;
+}
+
+.terminal-page .sidebar {
+  font-family: "hack", monospace !important;
+}
+
+.terminal-page .sidebar .nav-link {
+  color: var(--oc-green-9) !important;
+}
+
+.terminal-page .sidebar .nav-link svg {
+  color: var(--oc-green-4) !important;
+}
+
+.terminal-page .sidebar .nav-link:hover {
+  color: var(--oc-green-9) !important;
+}
+
+.terminal-page .sidebar .nav-link:hover svg {
+  color: var(--oc-green-9) !important;
+}
+
+.terminal-page .sidebar .nav-link.active {
+  color: var(--oc-green-9) !important;
+}
+
+.terminal-page .sidebar .nav-link.active svg {
+  color: var(--oc-green-9) !important;
+}
+
+/* Override the main content for the terminal page */
+.terminal-page .main-content {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  width: calc(100% - 50px) !important;
+  margin-left: 50px !important;
+  padding: 0 !important;
+  height: auto !important;
+  background: #333 !important;
+}
+
+/* The two monitors side by side */
+.terminal-container {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  height: 70vh !important; /* Reduced from 90vh */
+  gap: 30px !important; /* Increased gap */
+  background: #333 !important;
+  padding: 40px !important; /* Increased padding */
+  margin: 20px auto !important; /* Center horizontally */
+  min-height: calc(70vh - 100px) !important; /* Adjusted for smaller height */
+  max-width: 1400px !important; /* Limit maximum width */
+  width: 90% !important; /* Use 90% of available width */
+  font-family: "Courier New", "Monaco", "Consolas", monospace !important;
+}
+
+@media (max-width: 768px) {
+  .terminal-container {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
+    height: 80vh !important;
+    margin: 10px !important;
+    gap: 20px !important;
+    padding: 20px !important;
+    width: 95% !important;
+  }
+  
+  .terminal-page .main-content {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+}
+
+/* Each individual monitor */
+.monitor {
+  background: #071a0a !important;
+  border: 2px solid #444 !important; /* Reduced from 3px */
+  border-radius: 8px !important; /* Reduced from 10px */
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 300px !important; /* Reduced from 400px */
+}
+
+/* The Windows 98 monitor */
+.windows-monitor {
+  background: #c0c0c0 !important;
+  border: 2px solid #808080 !important; /* Reduced from 3px */
+}
+
+.windows-monitor .monitor-frame {
+  background: #000 !important;
+  padding: 0 !important; /* Remove padding to allow full height */
+  border-radius: 4px !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.windows-monitor .monitor-screen {
+  background: #008080 !important;
+  height: 100% !important;
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* The Windows desktop area */
+.windows-monitor .desktop {
+  padding: 15px !important;
+  flex: 1 1 auto !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, 70px) !important; /* Reduced from 80px */
+  grid-template-rows: repeat(auto-fill, 70px) !important; /* Reduced from 80px */
+  gap: 15px !important; /* Reduced from 20px */
+  align-content: start !important;
+}
+
+/* The desktop icons */
+.windows-monitor .desktop-icon {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 70px !important; /* Reduced from 80px */
+  height: 70px !important; /* Reduced from 80px */
+  cursor: pointer !important;
+  border: 2px solid transparent !important;
+  border-radius: 4px !important;
+  transition: all 0.2s ease !important;
+  user-select: none !important;
+}
+
+.windows-monitor .desktop-icon:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: #fff !important;
+}
+
+.windows-monitor .desktop-icon.selected {
+  background: rgba(0, 123, 255, 0.3) !important;
+  border-color: #007bff !important;
+}
+
+.windows-monitor .icon-image {
+  font-size: 28px !important; /* Reduced from 32px */
+  margin-bottom: 4px !important; /* Reduced from 5px */
+}
+
+.windows-monitor .icon-text {
+  font-size: 9px !important; /* Reduced from 10px */
+  text-align: center !important;
+  color: #fff !important;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8) !important;
+  line-height: 1.2 !important;
+  max-width: 60px !important; /* Reduced from 70px */
+  word-wrap: break-word !important;
+}
+
+/* The taskbar at the bottom */
+.windows-monitor .taskbar {
+  /* Remove absolute positioning, let flexbox handle it */
+  position: static !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  height: 28px !important;
+  background: #c0c0c0 !important;
+  border-top: 2px solid #fff !important;
+  border-left: 2px solid #fff !important;
+  border-right: 2px solid #808080 !important;
+  border-bottom: 2px solid #808080 !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 5px !important;
+  gap: 5px !important;
+  z-index: 10 !important;
+  flex-shrink: 0 !important;
+}
+
+/* The start button */
+.windows-monitor .start-button {
+  background: #c0c0c0 !important;
+  border: 2px solid #fff !important;
+  border-right: 2px solid #808080 !important;
+  border-bottom: 2px solid #808080 !important;
+  border-left: 2px solid #fff !important;
+  padding: 2px 8px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  transition: all 0.1s ease !important;
+}
+
+.windows-monitor .start-button:hover {
+  background: #d4d4d4 !important;
+}
+
+.windows-monitor .start-button:active {
+  border: 2px solid #808080 !important;
+  border-right: 2px solid #fff !important;
+  border-bottom: 2px solid #fff !important;
+  border-left: 2px solid #808080 !important;
+}
+
+.windows-monitor .start-text {
+  color: #000 !important;
+}
+
+/* Windows taskbar items */
+.windows-monitor .taskbar-items {
+  display: flex !important;
+  gap: 2px !important;
+  flex: 1 !important;
+}
+
+.windows-monitor .taskbar-item {
+  background: #c0c0c0 !important;
+  border: 2px solid #fff !important;
+  border-right: 2px solid #808080 !important;
+  border-bottom: 2px solid #808080 !important;
+  border-left: 2px solid #fff !important;
+  padding: 2px 6px !important;
+  font-size: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  min-width: 20px !important;
+  justify-content: center !important;
+}
+
+.windows-monitor .system-tray {
+  display: flex !important;
+  gap: 2px !important;
+  align-items: center !important;
+}
+
+.windows-monitor .tray-item {
+  background: #c0c0c0 !important;
+  border: 2px solid #fff !important;
+  border-right: 2px solid #808080 !important;
+  border-bottom: 2px solid #808080 !important;
+  border-left: 2px solid #fff !important;
+  padding: 2px 4px !important;
+  font-size: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 16px !important;
+}
+
+/* Windows start menu */
+.windows-monitor .start-menu {
+  position: absolute !important;
+  bottom: 28px !important;
+  left: 0 !important;
+  width: 200px !important;
+  background: #c0c0c0 !important;
+  border: 2px solid #fff !important;
+  border-right: 2px solid #808080 !important;
+  border-bottom: 2px solid #808080 !important;
+  border-left: 2px solid #fff !important;
+  display: none !important;
+  z-index: 1000 !important;
+}
+
+.windows-monitor .start-menu.active {
+  display: block !important;
+}
+
+.windows-monitor .start-menu-header {
+  background: #000080 !important;
+  color: #fff !important;
+  padding: 8px !important;
+  border-bottom: 2px solid #808080 !important;
+}
+
+.windows-monitor .user-info {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.windows-monitor .user-icon {
+  font-size: 16px !important;
+}
+
+.windows-monitor .user-name {
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
+
+.windows-monitor .start-menu-content {
+  padding: 5px 0 !important;
+}
+
+.windows-monitor .menu-section {
+  border-bottom: 1px solid #808080 !important;
+}
+
+.windows-monitor .menu-section:last-child {
+  border-bottom: none !important;
+}
+
+.windows-monitor .menu-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 4px 8px !important;
+  cursor: pointer !important;
+  font-size: 11px !important;
+  transition: background 0.1s ease !important;
+}
+
+.windows-monitor .menu-item:hover {
+  background: #000080 !important;
+  color: #fff !important;
+}
+
+.windows-monitor .menu-item.shutdown:hover {
+  background: #800000 !important;
+}
+
+.windows-monitor .menu-icon {
+  font-size: 14px !important;
+  width: 16px !important;
+  text-align: center !important;
+}
+
+.windows-monitor .menu-text {
+  flex: 1 !important;
+}
+
+/* Windows programs menu */
+.windows-monitor .programs-menu {
+  position: absolute !important;
+  bottom: 28px !important;
+  left: 200px !important;
+  width: 180px !important;
+  background: #c0c0c0 !important;
+  border: 2px solid #fff !important;
+  border-right: 2px solid #808080 !important;
+  border-bottom: 2px solid #808080 !important;
+  border-left: 2px solid #fff !important;
+  display: none !important;
+  z-index: 1001 !important;
+}
+
+.windows-monitor .programs-menu.active {
+  display: block !important;
+}
+
+.windows-monitor .menu-category {
+  border-bottom: 1px solid #808080 !important;
+}
+
+.windows-monitor .menu-category:last-child {
+  border-bottom: none !important;
+}
+
+.windows-monitor .category-header {
+  background: #c0c0c0 !important;
+  padding: 4px 8px !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  border-bottom: 1px solid #808080 !important;
+}
+
+/* Kali monitor specific */
+.kali-monitor {
+  background: #071a0a !important;
+  border: 2px solid #444 !important; /* Reduced from 3px */
+}
+
+.kali-monitor .monitor-frame {
+  background: #000 !important;
+  padding: 15px !important; /* Reduced from 20px */
+  border-radius: 4px !important; /* Reduced from 5px */
+  height: 100% !important;
+}
+
+.kali-monitor .monitor-screen {
+  background: #000 !important;
+  height: 100% !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Kali terminal */
+.kali-monitor .terminal {
+  background: #000 !important;
+  color: #00ff00 !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.kali-monitor .terminal-header {
+  background: #333 !important;
+  color: #00ff00 !important;
+  padding: 5px 10px !important;
+  border-bottom: 1px solid #00ff00 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.kali-monitor .terminal-content {
+  flex: 1 !important;
+  padding: 10px !important;
+  overflow-y: auto !important;
+  font-family: "Courier New", monospace !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+}
+
+.kali-monitor .terminal-line {
+  margin-bottom: 5px !important;
+}
+
+.kali-monitor .prompt {
+  color: #00ff00 !important;
+  font-weight: bold !important;
+}
+
+.kali-monitor .command {
+  color: #ffffff !important;
+}
+
+.kali-monitor .terminal-output {
+  color: #00ff00 !important;
+  margin-bottom: 10px !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .terminal-container {
+    padding: 15px !important;
+  }
+  
+  .monitor {
+    border-width: 1px !important;
+  }
+} 
