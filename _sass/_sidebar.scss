@@ -19,17 +19,17 @@ $shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.2);
 
 // The hamburger menu button for mobile
 .sidebar-toggle {
-  display: none;
-  position: absolute;
-  top: 24px;
-  right: -22px;
-  width: $toggle-size;
-  height: $toggle-size;
-  background: $toggle-bg;
-  border: 1px solid $toggle-border;
+  display: none; // Hidden by default on desktop
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  width: 44px;
+  height: 44px;
+  background: rgba(33, 37, 41, 0.95);
+  border: 2px solid rgba(0, 255, 65, 0.3);
   border-radius: 8px;
   cursor: pointer;
-  z-index: 1001;
+  z-index: 1002; // Higher than sidebar
   align-items: center;
   justify-content: center;
   transition: $sidebar-transition;
@@ -37,13 +37,13 @@ $shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.2);
   box-shadow: $shadow-light;
   
   svg {
-    color: $toggle-color;
+    color: var(--oc-green-9);
     transition: $sidebar-transition;
   }
   
   &:hover {
-    background: rgba(33, 37, 41, 0.95);
-    border-color: $toggle-color;
+    background: rgba(33, 37, 41, 0.98);
+    border-color: var(--oc-green-9);
     box-shadow: $shadow-medium;
     transform: translateY(-1px);
     
@@ -219,20 +219,12 @@ $shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.2);
   }
   
   .sidebar-toggle {
-    display: flex;
-    position: fixed;
-    top: 16px;
-    left: 16px; // Position it on the left side for better visibility
-    width: 44px;
-    height: 44px;
-    background: rgba(33, 37, 41, 0.95);
-    border: 2px solid rgba(0, 255, 65, 0.3);
-    z-index: 1002; // Higher than sidebar
+    display: flex !important; // Force show on mobile
   }
   
   // When sidebar is shown, hide the toggle button
   .sidebar.force-show ~ .sidebar-toggle {
-    display: none;
+    display: none !important;
   }
 }
 

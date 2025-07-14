@@ -12,17 +12,17 @@
     <link rel="stylesheet" href="{{ '/assets/css/kali-terminal.css' | relative_url }}">
 </head>
 <body class="terminal-page">
+    <!-- Hamburger menu button for mobile - OUTSIDE the sidebar -->
+    <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </button>
+
     <!-- The navigation menu on the left -->
     <nav id="sidebar" class="sidebar">
-        <!-- Hamburger menu button for mobile -->
-        <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle navigation">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-        </button>
-        
         <div class="sidebar-content">
             <ul class="sidebar-nav">
                 <li><a href="/" class="nav-link">
@@ -263,10 +263,11 @@
             const mainContent = document.querySelector('.main-content');
             
             // Handle the hamburger menu clicks
-            toggle.addEventListener('click', function() {
+            toggle.addEventListener('click', function(e) {
+                e.stopPropagation();
                 if (window.innerWidth <= 768) {
                     // On mobile, show/hide the menu
-                    sidebar.classList.toggle('collapsed');
+                    sidebar.classList.toggle('force-show');
                     mainContent.classList.toggle('expanded');
                 } else {
                     // On desktop, just show it temporarily
@@ -278,9 +279,17 @@
             document.addEventListener('click', function(e) {
                 if (window.innerWidth <= 768) {
                     if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
-                        sidebar.classList.add('collapsed');
+                        sidebar.classList.remove('force-show');
                         mainContent.classList.add('expanded');
                     }
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('force-show');
+                    mainContent.classList.remove('expanded');
                 }
             });
         });
