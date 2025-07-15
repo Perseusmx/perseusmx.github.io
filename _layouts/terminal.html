@@ -3,13 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Security Headers -->
+    <!-- Content Security Policy to prevent XSS attacks -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
+    
+
+    
+    <!-- Cross-Origin Opener Policy for origin isolation -->
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
+    
+    <!-- X-Frame-Options to prevent clickjacking -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    
+    <!-- Additional security headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    
     <title>Terminal - Perseus Blog</title>
-    <link rel="stylesheet" href="{{ '/assets/css/normalize.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/open-color.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/terminal.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/windows-monitor.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/kali-terminal.css' | relative_url }}">
+    <!-- Critical CSS inline -->
+    <style>
+      /* Critical rendering path styles */
+      body { font-family: "hack", monospace; font-size: 16px; background-color: #212529; color: #40c057; }
+      main { position: absolute; width: 98%; top: 50%; left: 55%; transform: translate(-50%, -50%); }
+      .sidebar { position: fixed; left: 0; top: 0; width: 250px; height: 100vh; background: rgba(0, 0, 0, 0.9); border-right: 2px solid #40c057; z-index: 1000; }
+      .sidebar-toggle { display: none; position: fixed; top: 20px; left: 20px; z-index: 1001; background: transparent; border: none; color: #40c057; cursor: pointer; }
+      @media (max-width: 768px) { .sidebar-toggle { display: block; } .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; } }
+    </style>
+    
+    <!-- Non-critical CSS loaded asynchronously -->
+    <link rel="stylesheet" href="{{ '/assets/css/normalize.css' | relative_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ '/assets/css/open-color.css' | relative_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ '/assets/css/terminal.css' | relative_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ '/assets/css/windows-monitor.css' | relative_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ '/assets/css/kali-terminal.css' | relative_url }}" media="print" onload="this.media='all'">
+    
+    <!-- Fallback for browsers that don't support onload -->
+    <noscript>
+      <link rel="stylesheet" href="{{ '/assets/css/normalize.css' | relative_url }}">
+      <link rel="stylesheet" href="{{ '/assets/css/open-color.css' | relative_url }}">
+      <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+      <link rel="stylesheet" href="{{ '/assets/css/terminal.css' | relative_url }}">
+      <link rel="stylesheet" href="{{ '/assets/css/windows-monitor.css' | relative_url }}">
+      <link rel="stylesheet" href="{{ '/assets/css/kali-terminal.css' | relative_url }}">
+    </noscript>
 </head>
 <body class="terminal-page">
     <!-- Hamburger menu button for mobile - OUTSIDE the sidebar -->
@@ -252,8 +291,8 @@
         </div>
     </footer>
 
-    <script src="{{ '/assets/js/windows-monitor.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/kali-terminal.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/windows-monitor.js' | relative_url }}" defer></script>
+    <script src="{{ '/assets/js/kali-terminal.js' | relative_url }}" defer></script>
     
     <script>
         // Handle the sidebar menu on mobile

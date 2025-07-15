@@ -5,10 +5,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
+
+  
+  <!-- Security Headers -->
+  <!-- Content Security Policy to prevent XSS attacks -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
+  
+
+  
+  <!-- Cross-Origin Opener Policy for origin isolation -->
+  <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
+  
+  <!-- X-Frame-Options to prevent clickjacking -->
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  
+  <!-- Additional security headers -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+  
   <title>{{ site.title }}</title>
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="{{ 'assets/webfonts/hack-regular-subset.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ 'assets/webfonts/hack-italic-subset.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 
 {% seo title=false %}
   <link rel="icon" type="image/x-icon" href="{{ 'assets/favicon.ico' | relative_url }}" />
@@ -16,12 +36,33 @@
   <link rel="icon" type="image/png" sizes="32x32" href="{{ 'assets/favicon-32x32.png' | relative_url }}">
   <link rel="icon" type="image/png" sizes="16x16" href="{{ 'assets/favicon-16x16.png' | relative_url }}">
   <link rel="manifest" href="{{ 'assets/site.webmanifest' | relative_url }}">
-  <link rel="stylesheet" href="{{ 'assets/css/normalize.css' | relative_url }}?v={{ site.time | date: '%s' }}" />
-  <link rel="stylesheet" href="{{ 'assets/css/open-color.css' | relative_url }}?v={{ site.time | date: '%s' }}" />
-  <link rel="stylesheet" href="{{ 'assets/css/styles.css' | relative_url }}?v={{ site.time | date: '%s' }}" />
+  <!-- Critical CSS inline -->
+  <style>
+    /* Critical rendering path styles */
+    body { font-family: "hack", monospace; font-size: 16px; background-color: #212529; color: #40c057; }
+    main { position: absolute; width: 98%; top: 50%; left: 55%; transform: translate(-50%, -50%); }
+    .sidebar { position: fixed; left: 0; top: 0; width: 250px; height: 100vh; background: rgba(0, 0, 0, 0.9); border-right: 2px solid #40c057; z-index: 1000; }
+    .sidebar-toggle { display: none; position: fixed; top: 20px; left: 20px; z-index: 1001; background: transparent; border: none; color: #40c057; cursor: pointer; }
+    @media (max-width: 768px) { .sidebar-toggle { display: block; } .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; } }
+  </style>
+  
+  <!-- Non-critical CSS loaded asynchronously -->
+  <link rel="stylesheet" href="{{ 'assets/css/normalize.css' | relative_url }}?v={{ site.time | date: '%s' }}" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="{{ 'assets/css/open-color.css' | relative_url }}?v={{ site.time | date: '%s' }}" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="{{ 'assets/css/styles.css' | relative_url }}?v={{ site.time | date: '%s' }}" media="print" onload="this.media='all'" />
   {% if page.layout == 'default' and page.title == 'Blog' %}
-  <link rel="stylesheet" href="{{ 'assets/css/blog.css' | relative_url }}?v={{ site.time | date: '%s' }}" />
+  <link rel="stylesheet" href="{{ 'assets/css/blog.css' | relative_url }}?v={{ site.time | date: '%s' }}" media="print" onload="this.media='all'" />
   {% endif %}
+  
+  <!-- Fallback for browsers that don't support onload -->
+  <noscript>
+    <link rel="stylesheet" href="{{ 'assets/css/normalize.css' | relative_url }}?v={{ site.time | date: '%s' }}" />
+    <link rel="stylesheet" href="{{ 'assets/css/open-color.css' | relative_url }}?v={{ site.time | date: '%s' }}" />
+    <link rel="stylesheet" href="{{ 'assets/css/styles.css' | relative_url }}?v={{ site.time | date: '%s' }}" />
+    {% if page.layout == 'default' and page.title == 'Blog' %}
+    <link rel="stylesheet" href="{{ 'assets/css/blog.css' | relative_url }}?v={{ site.time | date: '%s' }}" />
+    {% endif %}
+  </noscript>
   <script src="{{ 'assets/js/typed.umd.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 </head>
 
