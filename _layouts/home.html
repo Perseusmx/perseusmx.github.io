@@ -29,6 +29,10 @@ layout: default
 {% assign tab = '_self' -%}
 {% endif -%}
 
+<header class="page-header">
+  <h1 class="visually-hidden">{{ site.title }}</h1>
+</header>
+
 <div id="json">
   {% for pair in site.data.json %}
   <div class="my ms">
@@ -72,7 +76,11 @@ layout: default
     {% if value.url -%}
     <p class="ms">
       {{ quote_key }}<span class="key">{{ value.key }}</span>{{ quote_key }}:
+      {% if value.obfuscated -%}
+      {{ quote_value }}<a class="value obfuscated-email" href="{{ value.url | relative_url }}" target="{{ tab }}" data-email="{{ value.value | replace: '[at]', '@' | replace: '[dot]', '.' }}">{{ value.value }}</a>{{ quote_value }}
+      {%- else -%}
       {{ quote_value }}<a class="value" href="{{ value.url | relative_url }}" target="{{ tab }}">{{ value.value }}</a>{{ quote_value }}
+      {%- endif -%}
       {%- unless forloop.last -%}
       {{ comma }}
       {%- endunless %}

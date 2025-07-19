@@ -1,0 +1,37 @@
+{
+  "name": "perseus-blog",
+  "version": "1.0.0",
+  "description": "Personal blog built with Jekyll featuring a custom Kali Linux terminal interface",
+  "main": "index.js",
+  "scripts": {
+    "build": "bundle exec jekyll build",
+    "serve": "bundle exec jekyll serve",
+    "serve-drafts": "bundle exec jekyll serve --drafts",
+    "clean": "bundle exec jekyll clean",
+    "doctor": "bundle exec jekyll doctor",
+    "test": "bundle exec htmlproofer ./_site --allow-missing-href --allow-hash-href --disable-external",
+    "lint": "bundle exec htmlbeautifier _layouts/*.html _includes/*.html",
+    "optimize-images": "find assets -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' | xargs -I {} echo 'Optimizing {}'",
+    "deploy": "npm run build && npm run test"
+  },
+  "keywords": [
+    "jekyll",
+    "blog",
+    "terminal",
+    "cybersecurity",
+    "penetration-testing"
+  ],
+  "author": "Perseus",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/perseusmx/perseusmx.github.io.git"
+  },
+  "devDependencies": {
+    "htmlbeautifier": "^1.4.2"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "ruby": ">=2.7.0"
+  }
+} 

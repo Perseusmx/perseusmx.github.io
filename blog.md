@@ -4,10 +4,11 @@ title: Blog
 ---
 
 <div class="blog-container">
-  <h1>Blog</h1>
-  
-  <div class="search-container">
-    <input type="text" id="search-input" placeholder="Search posts..." class="search-input">
+  <div class="blog-header">
+    <h1>Blog</h1>
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Search posts..." class="search-input">
+    </div>
   </div>
   
   <div class="category-filter">

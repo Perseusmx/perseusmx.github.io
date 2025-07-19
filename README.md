@@ -1,59 +1,60 @@
 # Perseus Blog
 
-A personal blog built with Jekyll, featuring a custom Kali Linux terminal interface. Built on top of the hacked-jekyll theme with vanilla JavaScript for interactivity and custom CSS for terminal styling. Still a work in progress.
+My personal cybersecurity blog built with Jekyll. Features a custom Kali Linux terminal interface that actually works - you can type commands and get realistic outputs. Built on the hacked-jekyll theme but heavily customized with vanilla JavaScript and custom CSS to create a proper terminal experience.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+## What's Here
 
-- **Interactive Terminal**: Custom terminal emulator with realistic command outputs
-- **Clean Design**: Minimalistic layout with terminal aesthetics
-- **Custom 404**: Data corruption effects for missing pages
+- **Working Terminal**: Real terminal emulator with command history, realistic outputs, and proper terminal behavior
+- **Blog Section**: Clean blog layout with search, category filtering, and tag system
+- **Theme Toggle**: Switch between dark (black/green) and light (mint/dark green) themes - both maintain the terminal aesthetic
+- **Email Protection**: Click-to-reveal email addresses to avoid spam bots
+- **Mobile Friendly**: Works properly on phones and tablets
+- **SEO Ready**: All the meta tags and structured data for search engines
+- **Fast Loading**: Optimized to prevent the flash of unstyled content
 
-## Tech Stack
+## Tech Stuff
 
 - **Jekyll** - Static site generator
-- **hacked-jekyll theme** - Terminal/JSON-themed base
-- **Vanilla JavaScript** - Interactive terminal and effects
-- **Custom CSS** - Terminal styling and animations
-- **Typed.js** - Animated typing effects
+- **hacked-jekyll theme** - Starting point (heavily modified)
+- **Vanilla JavaScript** - Terminal logic, theme switching, email obfuscation
+- **Custom CSS** - Terminal styling, animations, responsive design
+- **Typed.js** - Typing animations for the terminal
 
-## Structure
+## File Structure
 
-- `_data/json.yml` - Site content and tech stack
-- `_layouts/` - Custom layouts including terminal interface
-- `assets/` - CSS, JS, and terminal assets
+- `_data/json.yml` - My info, tech stack, and content
+- `_layouts/` - Custom page layouts including the terminal
+- `assets/` - All the CSS, JS, and terminal assets
 - `_posts/` - Blog posts organized by category
 
-## Customization
+## Customizing
 
-Modify `_data/json.yml` to update your information, tech stack, and focus areas.
+Just edit `_data/json.yml` to change your info, tech stack, and focus areas.
 
-## Security
+## Security Features
 
-This blog implements security headers to protect against common web vulnerabilities:
+Added some basic security headers:
 
-- **Content Security Policy (CSP)**: Prevents XSS attacks
-- **X-Frame-Options**: Prevents clickjacking attacks  
-- **X-Content-Type-Options**: Prevents MIME sniffing
-- **Referrer Policy**: Controls referrer information
-- **HSTS**: Already provided by GitHub Pages
+- **CSP** - Prevents XSS attacks
+- **X-Frame-Options** - Stops clickjacking
+- **X-Content-Type-Options** - Prevents MIME sniffing
+- **Referrer Policy** - Controls referrer info
 
-### Testing
+### Local Development
 
 ```bash
-# Start Jekyll server
-bundle exec jekyll serve
+# Install Ruby dependencies
+bundle install
+
+# Start the dev server
+bundle exec jekyll serve --livereload
+
+# Build for production
+bundle exec jekyll build
 ```
 
 ## Credits
 
-This blog is built on top of the [hacked-jekyll](https://github.com/piazzai/hacked-jekyll) theme by [piazzai](https://github.com/piazzai), which is licensed under the MIT License. The original theme has been heavily modified to include:
-
-- Custom terminal interface
-- Interactive terminal simulations
-- Enhanced security headers
-- Blog functionality
-- Custom layouts and styling
-
-**Original Theme**: [hacked-jekyll](https://github.com/piazzai/hacked-jekyll) - A responsive, minimalistic Jekyll theme with a "hacked" JSON appearance. 
+Built on the [hacked-jekyll](https://github.com/piazzai/hacked-jekyll) theme by [piazzai](https://github.com/piazzai) (MIT License). The original theme was just a JSON-style layout - I added the working terminal, blog functionality, theme switching, and all the interactive features. 

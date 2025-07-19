@@ -22,33 +22,216 @@
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     
     <title>Terminal - Perseus Blog</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/apple-touch-icon.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/favicon-32x32.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/favicon-16x16.png' | relative_url }}">
+    <link rel="manifest" href="{{ '/assets/site.webmanifest' | relative_url }}">
+    
     <!-- Critical CSS inline -->
     <style>
-      /* Critical rendering path styles */
-      body { font-family: "hack", monospace; font-size: 16px; background-color: #212529; color: #40c057; }
-      main { position: absolute; width: 98%; top: 50%; left: 55%; transform: translate(-50%, -50%); }
-      .sidebar { position: fixed; left: 0; top: 0; width: 250px; height: 100vh; background: rgba(0, 0, 0, 0.9); border-right: 2px solid #40c057; z-index: 1000; }
-      .sidebar-toggle { display: none; position: fixed; top: 20px; left: 20px; z-index: 1001; background: transparent; border: none; color: #40c057; cursor: pointer; }
-      @media (max-width: 768px) { .sidebar-toggle { display: block; } .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; } }
+      /* Critical rendering path styles - prevents FOUC */
+      * { box-sizing: border-box; }
+      html { font-size: 16px; }
+      body { 
+        font-family: "hack", monospace; 
+        font-size: 1rem; 
+        background-color: #212529; 
+        color: #40c057; 
+        margin: 0; 
+        padding: 0; 
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+      main { 
+        position: absolute; 
+        width: 98%; 
+        top: 50%; 
+        left: 55%; 
+        transform: translate(-50%, -50%); 
+        z-index: 1;
+      }
+      .sidebar { 
+        position: fixed; 
+        left: 0; 
+        top: 50%; 
+        transform: translateY(-50%) translateX(calc(-100% + 3.125rem));
+        width: 13.75rem; 
+        height: auto;
+        max-height: 21.875rem;
+        background: rgba(33, 37, 41, 0.95); 
+        border: 1px solid rgba(0, 255, 65, 0.15);
+        border-radius: 0 0.75rem 0.75rem 0;
+        z-index: 1000; 
+        overflow: hidden;
+        backdrop-filter: blur(20px);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .sidebar:hover { transform: translateY(-50%) translateX(0); }
+      .sidebar-toggle { 
+        display: none; 
+        position: fixed; 
+        top: 1rem; 
+        left: 1rem; 
+        width: 2.75rem; 
+        height: 2.75rem; 
+        z-index: 1002; 
+        background: rgba(33, 37, 41, 0.95); 
+        border: 2px solid rgba(0, 255, 65, 0.3); 
+        border-radius: 0.5rem; 
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+      .theme-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        width: 2.75rem;
+        height: 2.75rem;
+        background: rgba(33, 37, 41, 0.95);
+        border: 2px solid rgba(0, 255, 65, 0.3);
+        border-radius: 0.5rem;
+        cursor: pointer;
+        z-index: 1002;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+      .sidebar-nav { list-style: none; margin: 0; padding: 0; }
+      .nav-link { 
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        color: var(--oc-green-9, #40c057); 
+        text-decoration: none; 
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
+        position: relative;
+        white-space: nowrap;
+        font-family: "hack", monospace;
+        font-size: 0.875rem;
+      }
+      .nav-link:hover { 
+        background: rgba(0, 255, 65, 0.1); 
+        border-left-color: var(--oc-green-9, #40c057);
+      }
+      .nav-link span { 
+        font-weight: 400; 
+        letter-spacing: 0.3px; 
+        opacity: 0; 
+        transform: translateX(-0.5rem);
+        transition: all 0.3s ease;
+        pointer-events: none;
+        order: 1;
+        color: var(--oc-green-9, #40c057);
+        font-size: 0.875rem;
+        text-align: center;
+        flex: 1;
+        margin: 0 auto;
+      }
+      .sidebar:hover .nav-link span { opacity: 1; transform: translateX(0); }
+      .nav-link svg { 
+        flex-shrink: 0; 
+        color: var(--oc-green-4, #40c057); 
+        transition: all 0.3s ease; 
+        width: 1.125rem; 
+        height: 1.125rem; 
+        order: 2;
+      }
+      .nav-link:hover svg { color: var(--oc-green-9, #40c057); transform: scale(1.05); }
+      .nav-link.active { 
+        background: rgba(0, 255, 65, 0.15); 
+        border-left-color: var(--oc-green-9, #40c057);
+      }
+      .nav-link.active svg { color: var(--oc-green-9, #40c057); }
+      
+      /* Light theme styles - Terminal/Hacker aesthetic (reversed) */
+      body.light-theme {
+        background-color: #f0f8f0;
+        color: #0a4a0a;
+      }
+      body.light-theme .sidebar {
+        background: rgba(240, 248, 240, 0.95);
+        border-color: rgba(10, 74, 10, 0.3);
+      }
+      body.light-theme .sidebar-toggle,
+      body.light-theme .theme-toggle {
+        background: rgba(240, 248, 240, 0.95);
+        border-color: rgba(10, 74, 10, 0.3);
+      }
+      body.light-theme .sidebar-toggle svg,
+      body.light-theme .theme-toggle svg {
+        color: #0a4a0a;
+      }
+      body.light-theme .nav-link {
+        color: #0a4a0a !important;
+      }
+      body.light-theme .nav-link:hover {
+        background: rgba(10, 74, 10, 0.1);
+      }
+      body.light-theme .nav-link.active {
+        background: rgba(10, 74, 10, 0.15);
+      }
+      body.light-theme .nav-link svg {
+        color: #0a4a0a !important;
+      }
+      body.light-theme.terminal-page {
+        background-color: #f0f8f0;
+      }
+      body.light-theme .terminal-container {
+        background-color: #f0f8f0;
+      }
+      body.light-theme .terminal-explanation {
+        background: rgba(240, 248, 240, 0.8);
+        border-color: rgba(10, 74, 10, 0.2);
+      }
+      body.light-theme .terminal-explanation p {
+        color: #0a4a0a;
+      }
+      body.light-theme .footer {
+        background: rgba(240, 248, 240, 0.8);
+      }
+      body.light-theme .footer p {
+        color: #0a4a0a;
+      }
+      body.light-theme .footer a {
+        color: #0a4a0a;
+      }
+      
+      @media (max-width: 768px) { 
+        .sidebar-toggle { display: flex; } 
+        .sidebar { 
+          top: 0; 
+          left: 0; 
+          width: 13.75rem; 
+          height: 100vh; 
+          transform: translateX(-100%); 
+          border-radius: 0;
+          max-height: none;
+        }
+        .sidebar.force-show { transform: translateX(0); }
+        .sidebar.force-show .nav-link span { opacity: 1; transform: translateX(0); }
+        .theme-toggle { top: 0.75rem; right: 0.75rem; width: 2.5rem; height: 2.5rem; }
+        .sidebar-toggle { top: 0.75rem; left: 0.75rem; width: 2.5rem; height: 2.5rem; }
+      }
     </style>
     
-    <!-- Non-critical CSS loaded asynchronously -->
-    <link rel="stylesheet" href="{{ '/assets/css/normalize.css' | relative_url }}" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="{{ '/assets/css/open-color.css' | relative_url }}" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="{{ '/assets/css/terminal.css' | relative_url }}" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="{{ '/assets/css/windows-monitor.css' | relative_url }}" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="{{ '/assets/css/kali-terminal.css' | relative_url }}" media="print" onload="this.media='all'">
-    
-    <!-- Fallback for browsers that don't support onload -->
-    <noscript>
-      <link rel="stylesheet" href="{{ '/assets/css/normalize.css' | relative_url }}">
-      <link rel="stylesheet" href="{{ '/assets/css/open-color.css' | relative_url }}">
-      <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
-      <link rel="stylesheet" href="{{ '/assets/css/terminal.css' | relative_url }}">
-      <link rel="stylesheet" href="{{ '/assets/css/windows-monitor.css' | relative_url }}">
-      <link rel="stylesheet" href="{{ '/assets/css/kali-terminal.css' | relative_url }}">
-    </noscript>
+    <!-- Load CSS synchronously to prevent FOUC -->
+    <link rel="stylesheet" href="{{ '/assets/css/normalize.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/open-color.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/terminal.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/windows-monitor.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/kali-terminal.css' | relative_url }}">
 </head>
 <body class="terminal-page">
     <!-- Hamburger menu button for mobile - OUTSIDE the sidebar -->
@@ -95,6 +278,21 @@
             </ul>
         </div>
     </nav>
+
+    <!-- Theme toggle button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+        <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+    </button>
 
     <!-- The main area with the terminals -->
     <main class="main-content">
@@ -330,6 +528,22 @@
                     sidebar.classList.remove('force-show');
                     mainContent.classList.remove('expanded');
                 }
+            });
+            
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            
+            // Check for saved theme preference or default to dark
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            if (currentTheme === 'light') {
+                body.classList.add('light-theme');
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                body.classList.toggle('light-theme');
+                const isLight = body.classList.contains('light-theme');
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
             });
         });
     </script>

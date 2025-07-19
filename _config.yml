@@ -2,6 +2,10 @@ title: Perseus Blog
 description: Penetration Tester specializing in Telecommunications Security and Fraud Prevention
 baseurl: ""
 url: "https://perseusmx.github.io"
+author: Perseus
+email: p3rseus@mailbox.org
+github_username: perseusmx
+twitter_username: perseusmx
 
 # Use local theme instead of gem
 theme: null

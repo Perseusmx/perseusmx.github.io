@@ -21,8 +21,9 @@
 - key: Contact
   value:
     - key: Email
-      value: p3rseus@mailbox.org
+      value: p3rseus[at]mailbox[dot]org
       url: "mailto:p3rseus@mailbox.org"
+      obfuscated: true
     - key: GitHub
       value: github.com/perseusmx
       url: https://github.com/perseusmx

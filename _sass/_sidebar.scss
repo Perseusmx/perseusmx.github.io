@@ -1,7 +1,7 @@
 // Sidebar navigation - the collapsible menu on the left
 // Configuration variables
-$sidebar-width: 220px; // Made it smaller to fit text and icons better
-$sidebar-visible-width: 50px; // Shows just a sliver when collapsed
+$sidebar-width: 13.75rem; // Made it smaller to fit text and icons better
+$sidebar-visible-width: 3.125rem; // Shows just a sliver when collapsed
 $sidebar-bg: rgba(33, 37, 41, 0.95);
 $sidebar-text: var(--oc-green-9);
 $sidebar-text-muted: var(--oc-green-4);
@@ -21,10 +21,10 @@ $shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.2);
 .sidebar-toggle {
   display: none; // Hidden by default on desktop
   position: fixed;
-  top: 16px;
-  left: 16px;
-  width: 44px;
-  height: 44px;
+  top: 1rem;
+  left: 1rem;
+  width: 2.75rem;
+  height: 2.75rem;
   background: rgba(33, 37, 41, 0.95);
   border: 2px solid rgba(0, 255, 65, 0.3);
   border-radius: 8px;
@@ -95,7 +95,7 @@ $shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.2);
   }
   
   .sidebar-content {
-    padding: 16px 0;
+    padding: 1rem 0;
     display: flex;
     flex-direction: column;
     width: $sidebar-width;
@@ -113,8 +113,8 @@ $shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.2);
         display: flex;
         align-items: center;
         justify-content: space-between; // Icons go on the right, text in the middle
-        gap: 12px;
-        padding: 12px 16px;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
         color: $sidebar-text;
         text-decoration: none;
         transition: $sidebar-transition;
@@ -144,7 +144,7 @@ $shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.2);
           pointer-events: none;
           order: 1; // Text goes on the left
           color: $sidebar-text;
-          font-size: 14px;
+          font-size: 0.875rem;
           text-align: center; // Center the text
           flex: 1; // Use up the available space
           margin: 0 auto; // Center it in that space
