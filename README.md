@@ -2,7 +2,7 @@
 
 My personal cybersecurity blog built with Jekyll. Features a custom Kali Linux terminal interface that actually works - you can type commands and get realistic outputs. Built on the hacked-jekyll theme but heavily customized with vanilla JavaScript and custom CSS to create a proper terminal experience.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg "MIT License Badge")](https://opensource.org/licenses/MIT)
 
 ## What's Here
 

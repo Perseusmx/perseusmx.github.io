@@ -107,6 +107,25 @@
   }
 }
 
+// bankca //
+@media (max-width: 600px) {
+  main {
+    left: 45%;
+  }
+  #json {
+    white-space: wrap !important;
+  }
+}
+
+@media (max-width: 400px) {
+  main {
+    left: 40%;
+  }
+  #json {
+    white-space: wrap !important;
+  }
+}
+
 // Hover effects for interactive elements
 a {
   transition: all 0.2s ease;

@@ -60,14 +60,29 @@ layout: default
         // Create shuffled strings array
         const shuffledStrings = shuffleArray([...strings]);
         
-        new Typed("#typed-{{ pair.key | downcase | replace: ' ', '-' }}", {
-          strings: shuffledStrings,
-          backSpeed: 10,
-          typeSpeed: 30,
-          backDelay: 1000,
-          loop: true,
-          smartBackspace: true,
-        });
+        // Wait for DOM to be ready and Typed to be available
+        function initTyped() {
+          if (typeof Typed !== 'undefined') {
+            new Typed("#typed-{{ pair.key | downcase | replace: ' ', '-' }}", {
+              strings: shuffledStrings,
+              backSpeed: 10,
+              typeSpeed: 30,
+              backDelay: 1000,
+              loop: true,
+              smartBackspace: true,
+            });
+          } else {
+            // Retry after a short delay if Typed is not yet loaded
+            setTimeout(initTyped, 100);
+          }
+        }
+        
+        // Start initialization when DOM is ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initTyped);
+        } else {
+          initTyped();
+        }
       })();
     </script>
     {%- elsif pair.value.first.key -%}
