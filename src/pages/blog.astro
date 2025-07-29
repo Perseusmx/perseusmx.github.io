@@ -1,0 +1,177 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlogApp from '../components/BlogApp.svelte';
+---
+
+<Layout title="Blog - Digital Notes">
+    <script>
+        // Check for saved theme preference and apply it
+        if (typeof window !== 'undefined') {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-theme');
+            }
+        }
+    </script>
+    <div class="blog-page">
+        <header class="blog-header">
+            <div class="header-content">
+                <h1>
+                    <svg class="header-icon" width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="m22,4v-1h-1v-1h-1v-1h-3v1h-1v1h-1v1h-1v1h-2v1h-3v1h-3v1h-1v2h-1v3h-1v3h-1v3h-1v3h1v1h3v-1h3v-1h3v-1h3v-1h2v-1h1v-3h1v-3h1v-2h1v-1h1v-1h1v-1h1v-3h-1Zm-6,8v3h-1v2h-1v1h-3v1h-3v1h-2v-1h1v-1h1v-1h1v-1h3v-3h-1v-1h-3v3h-1v1h-1v1h-1v1h-1v-2h1v-3h1v-3h1v-1h2v-1h3v-1h3"/>
+                    </svg>
+                    Digital Notes
+                </h1>
+                <p>My thoughts, experiences, and discoveries in the world of tech and creativity.</p>
+                <a href="/" class="back-link">← Back to Home</a>
+            </div>
+        </header>
+        
+        <main class="blog-main">
+            <div class="blog-container">
+                <div class="blog-content">
+                    <BlogApp client:load />
+                </div>
+            </div>
+        </main>
+    </div>
+</Layout>
+
+<style>
+    .blog-page {
+        background-color: var(--bg-color);
+        background-image: url('/images/ocean-wallpaper.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: 'VT323', monospace;
+        color: var(--font-color);
+        padding-bottom: 100px;
+        min-height: 100vh;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        position: relative;
+    }
+    
+    .blog-page::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0);
+        transition: background 0.3s ease;
+        pointer-events: none;
+        z-index: 0;
+    }
+    
+    :global(.dark-theme) .blog-page::before {
+        background: rgba(0, 0, 0, 0.4);
+    }
+    
+    .blog-header {
+        background-color: rgba(var(--header-color-rgb), 0.95);
+        border-bottom: 3px solid var(--border-color);
+        padding: 20px 20px;
+        box-shadow: 0 4px 8px var(--shadow-color);
+        backdrop-filter: blur(2px);
+        transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .header-content h1 {
+        font-size: 2.2em;
+        margin: 0 0 8px 0;
+        color: var(--font-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    
+    :global(.dark-theme) .header-content h1 {
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+    }
+    
+    .header-icon {
+        fill: var(--font-color);
+        filter: drop-shadow(2px 2px 0 var(--shadow-color));
+    }
+    
+    .header-content p {
+        font-size: 1em;
+        margin: 0 0 15px 0;
+        opacity: 0.8;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        transition: text-shadow 0.3s ease;
+    }
+    
+    :global(.dark-theme) .header-content p {
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2);
+    }
+    
+    .back-link {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: rgba(var(--surface-color-rgb), 0.95);
+        border: 2px solid var(--border-color);
+        border-radius: 6px;
+        color: var(--font-color);
+        text-decoration: none;
+        font-family: 'VT323', monospace;
+        font-size: 1em;
+        transition: all 0.2s ease;
+        backdrop-filter: blur(2px);
+    }
+    
+    .back-link:hover {
+        background-color: rgba(0, 0, 0, 0.9);
+        color: var(--surface-color);
+        transform: translateY(-2px);
+    }
+    
+    .blog-main {
+        padding: 20px 20px 40px 20px;
+    }
+    
+    .blog-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    .blog-content {
+        background-color: rgba(var(--surface-color-rgb), 0.95);
+        border: 3px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 5px 5px 0 var(--shadow-color);
+        margin-bottom: 40px;
+        backdrop-filter: blur(2px);
+        transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .loading {
+        text-align: center;
+        padding: 60px 20px;
+        font-size: 1.2em;
+    }
+</style>
+
+<script>
+    // This will be replaced with Svelte component for dynamic content
+    console.log('Blog page loaded');
+    
+    // Check for theme on page load
+    if (document.documentElement.classList.contains('dark-theme')) {
+        // Dark theme is active, no need to do anything as CSS variables handle it
+        console.log('Dark theme detected');
+    }
+</script> 
