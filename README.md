@@ -2,25 +2,42 @@
 
 A personal portfolio website with a retro computer aesthetic, featuring a Kali Linux-style terminal, interactive blog, and macOS-style desktop environment.
 
-## 🎨 Features
+![Astro](https://img.shields.io/badge/Astro-FF5D01?style=for-the-badge&logo=astro&logoColor=white)
+![Svelte](https://img.shields.io/badge/Svelte-FF3E00?style=for-the-badge&logo=svelte&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![Markdown](https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=GitHub%20Pages&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+
+
+
+## Features
 
 - **Retro Computer Aesthetic**: Kali Linux-inspired design with terminal themes
 - **Interactive Terminal**: Fully functional terminal with 20+ commands
-- **Blog System**: Markdown-based blog with multiple posts (PLACEHOLDERS )
+- **Blog System**: Astro-based markdown blog with syntax highlighting
 - **Theme System**: 5 different terminal themes (Dracula, Solarized, One Dark, Material Ocean, Gruvbox)
 - **Window Management**: Draggable windows with title bars and control buttons
 - **Responsive Design**: Works on desktop and mobile devices
 - **Smooth Animations**: CSS transitions and hover effects throughout
+- **Snake Game**: Classic retro arcade game with authentic styling
+- **Contact System**: Interactive contact page with toast notifications
+- **Data Corruption Effects**: Animated email corruption for retro aesthetic
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: [Astro](https://astro.build/) - Static site generator
 - **UI Components**: [Svelte](https://svelte.dev/) - Reactive JavaScript framework
 - **Styling**: Custom CSS with CSS variables for theming
 - **Font**: VT323 monospace font for authentic retro feel
-- **Markdown**: Blog posts written in Markdown
+- **Markdown**: Blog posts written in Markdown with Shiki syntax highlighting
+- **Content Collections**: Astro's built-in content management
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
@@ -30,12 +47,9 @@ src/
 │   │   ├── Window.svelte           # Draggable window component
 │   │   ├── Dock.svelte             # macOS-style dock navigation
 │   │   └── content/
-│   │       ├── About.svelte        # About page content
-│   │       ├── BlogPost.svelte     # Blog post viewer
-│   │       ├── Contact.svelte      # Contact information
-│   │       ├── Notes.svelte        # Blog listing
-│   │       ├── SnakeGame.svelte    # Retro Snake game
-│   │       └── Terminal.svelte     # Interactive terminal
+│   │       ├── About.svelte        # About page 
+│   │       ├── Contact.svelte      # Contact 
+│   │       └── SnakeGame.svelte    # Retro Snake game
 │   └── store.js                    # Svelte store for window management
 ├── content/
 │   └── blog/                       # Markdown blog posts
@@ -43,12 +57,13 @@ src/
 │   └── Layout.astro               # Main layout with fonts and styles
 ├── pages/
 │   ├── index.astro                # Home page
-│   └── api/                       # Blog API endpoints
+│   ├── blog.astro                 # Blog listing page
+│   └── blog/[slug].astro          # Individual blog post pages
 └── styles/
     └── global.css                 # Global styles and CSS variables
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -87,7 +102,7 @@ npm run build
 npm run preview
 ```
 
-## 🎯 Usage
+## Usage
 
 ### Navigation
 
@@ -97,11 +112,11 @@ npm run preview
 
 ### Applications
 
-1. **About Me** (👤): Personal information and contact details
-2. **Notes** (📝): Blog posts and articles
-3. **Contact** (📧): Contact information and social links
-4. **Terminal** (💻): Interactive Kali Linux-style terminal
-5. **Snake Game** (🎮): Classic arcade game
+1. **About Me**: Personal information 
+2. **Contact**: Contact information 
+3. **Terminal**: Interactive Kali Linux-style terminal
+4. **Snake Game**: Classic arcade game with retro styling
+5. **Blog**: Direct navigation to the markdown blog system
 
 ### Terminal Commands
 
@@ -112,7 +127,15 @@ The terminal includes 20+ commands:
 - **Fun**: `echo`, `neofetch`, `fortune`, `cowsay`
 - **Themes**: `theme` - Cycle through 5 terminal themes
 
-## 🎨 Customization
+### Blog System
+
+- **Markdown Support**: Write posts in Markdown with full syntax highlighting
+- **Content Collections**: Astro's built-in content management
+- **Responsive Design**: Optimized for all screen sizes
+- **Search & Filter**: Client-side search and tag filtering
+- **Syntax Highlighting**: VS Code-like code block styling
+
+## Customization
 
 ### Terminal Themes
 
@@ -154,18 +177,19 @@ export const APPS = readable([
 
 ```javascript
 import NewApp from './svelte/content/NewApp.svelte';
-const components = { About, Notes, Contact, Terminal, SnakeGame, NewApp };
+const components = { About, Contact, Terminal, SnakeGame, NewApp };
 ```
 
-## 📱 Responsive Design
+## Responsive Design
 
 The application is fully responsive and includes:
 - Mobile-optimized dock sizing
 - Touch-friendly interactions
 - Responsive window layouts
 - Adaptive typography
+- Scrollable blog content
 
-## 🎵 Retro Computer Inspiration
+## Retro Computer Inspiration
 
 This project captures the nostalgic feel of early computing with:
 
@@ -174,20 +198,22 @@ This project captures the nostalgic feel of early computing with:
 - Monospace typography
 - Bordered windows and controls
 - Classic terminal commands
+- Data corruption effects
+- Authentic retro game styling
 
-## 📄 License
+## License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📞 Contact
+## Contact
 
 For questions or feedback, please open an issue on GitHub.
 
-## 🙏 Credits
+## Credits
 
 - **Poolsuite.fm** - Original inspiration for the retro aesthetic and design philosophy
 - **VT323 Font** - Monospace font by Peter Wiegel for authentic terminal feel
@@ -195,3 +221,5 @@ For questions or feedback, please open an issue on GitHub.
 - **Gogh Themes** - Terminal color scheme inspiration from [Gogh](https://gogh-co.github.io/Gogh/)
 - **Icons** - [@hackernoon/pixel-icon-library](https://www.npmjs.com/package/@hackernoon/pixel-icon-library) - Pixel art icons used throughout the interface
 - **Wallpaper** - [D3Ext/aesthetic-wallpapers](https://github.com/D3Ext/aesthetic-wallpapers) - Ocean wallpaper background image
+
+# Updated Wed Jul 30 01:39:05 CEST 2025

@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@astrojs/svelte": "^7.1.0",
-    "@hackernoon/pixel-icon-library": "^1.0.6",
     "astro": "^5.12.4",
     "marked": "^16.1.1",
     "svelte": "^5.37.1",

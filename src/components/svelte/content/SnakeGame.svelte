@@ -32,10 +32,10 @@
     async function loadIcons() {
         try {
             const [playResponse, pauseResponse, refreshResponse, snakeResponse] = await Promise.all([
-                fetch('/node_modules/@hackernoon/pixel-icon-library/icons/SVG/regular/play.svg'),
-                fetch('/node_modules/@hackernoon/pixel-icon-library/icons/SVG/regular/pause.svg'),
-                fetch('/node_modules/@hackernoon/pixel-icon-library/icons/SVG/regular/refresh.svg'),
-                fetch('/node_modules/@hackernoon/pixel-icon-library/icons/SVG/regular/ellipses-horizontal.svg')
+                fetch('/icons/SVG/regular/play.svg'),
+                fetch('/icons/SVG/regular/pause.svg'),
+                fetch('/icons/SVG/regular/refresh.svg'),
+                fetch('/icons/SVG/regular/ellipses-horizontal.svg')
             ]);
             
             playIcon = await playResponse.text();
@@ -329,25 +329,7 @@
             {/if}
         </div>
         
-        <div class="instructions">
-            <h3>How to Play</h3>
-            <div class="controls-list">
-                <div class="control-item">
-                    <span class="key">↑↓←→</span>
-                    <span class="desc">Move snake</span>
-                </div>
-                <div class="control-item">
-                    <span class="key">WASD</span>
-                    <span class="desc">Alternative movement</span>
-                </div>
-                <div class="control-item">
-                    <span class="key">Space</span>
-                    <span class="desc">Pause/Resume</span>
-                </div>
-            </div>
-            <p class="objective">Eat the red food to grow and earn points. Don't hit the walls or yourself!</p>
-            <p class="debug">Debug: {isInitialized ? 'Game initialized' : 'Initializing...'}</p>
-        </div>
+
     </div>
 </div>
 
@@ -366,20 +348,21 @@
     
     .game-header {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     
     h1 {
         color: var(--font-color);
         border-bottom: 2px solid var(--border-color);
-        padding-bottom: 10px;
-        margin-bottom: 20px;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
         text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
         transition: color 0.3s ease, border-color 0.3s ease;
+        font-size: 1.5em;
     }
     
     h1 :global(svg) {
@@ -393,7 +376,7 @@
         border: 3px solid var(--border-color);
         border-radius: 12px;
         padding: 15px;
-        margin: 10px 0;
+        margin: 5px 0;
         box-shadow: 5px 5px 0 var(--shadow-color);
         flex: 1;
         display: flex;
@@ -406,7 +389,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         flex-wrap: wrap;
         gap: 15px;
     }
@@ -424,7 +407,7 @@
     
     .label {
         font-size: 0.9em;
-        color: #666;
+        color: #444;
     }
     
     .value {
@@ -450,6 +433,7 @@
         display: flex;
         align-items: center;
         gap: 6px;
+        color: var(--font-color);
     }
     
     .control-btn :global(svg) {
@@ -465,8 +449,9 @@
     }
     
     .control-btn:disabled {
-        opacity: 0.5;
+        opacity: 0.6;
         cursor: not-allowed;
+        color: var(--font-color);
     }
     
     .game-area {
@@ -475,7 +460,8 @@
         justify-content: center;
         align-items: center;
         flex: 1;
-        margin: 10px 0;
+        margin: 5px 0;
+        min-height: 320px;
     }
     
     .game-canvas {
@@ -501,64 +487,7 @@
         text-align: center;
     }
     
-    .instructions {
-        margin-top: 25px;
-        padding: 20px;
-        background-color: rgba(255, 255, 255, 0.1);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-    }
-    
-    .instructions h3 {
-        color: var(--font-color);
-        margin: 0 0 15px 0;
-        text-align: center;
-    }
-    
-    .controls-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 10px;
-        margin-bottom: 15px;
-    }
-    
-    .control-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 8px;
-        background-color: var(--surface-color);
-        border: 1px solid var(--border-color);
-        border-radius: 4px;
-    }
-    
-    .key {
-        background-color: var(--border-color);
-        color: var(--surface-color);
-        padding: 2px 8px;
-        border-radius: 3px;
-        font-size: 0.9em;
-        font-weight: bold;
-    }
-    
-    .desc {
-        font-size: 0.9em;
-        color: var(--font-color);
-    }
-    
-    .objective {
-        text-align: center;
-        font-style: italic;
-        color: #666;
-        margin: 0 0 10px 0;
-    }
-    
-    .debug {
-        text-align: center;
-        font-size: 0.8em;
-        color: #999;
-        margin: 0;
-    }
+
     
     @media (max-width: 768px) {
         .game-info {

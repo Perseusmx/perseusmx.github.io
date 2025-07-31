@@ -35,7 +35,7 @@
         }
         
         try {
-            const iconPath = `/node_modules/@hackernoon/pixel-icon-library/icons/SVG/regular/${iconName}.svg`;
+            const iconPath = `/icons/SVG/regular/${iconName}.svg`;
             const response = await fetch(iconPath);
             if (response.ok) {
                 const svgContent = await response.text();
@@ -126,7 +126,11 @@
         height: 100vh;
         overflow: hidden;
         background-color: var(--bg-color);
-        background-image: url('/images/ocean-wallpaper.png');
+        		background-image: url('/images/ocean-wallpaper.webp');
+		/* Fallback for browsers that don't support WebP */
+		@supports not (background-image: url('/images/ocean-wallpaper.webp')) {
+			background-image: url('/images/ocean-wallpaper-optimized.png');
+		}
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -236,6 +240,16 @@
         font-family: 'VT323', monospace;
     }
     
+    /* Mobile responsive sticky note */
+    @media (max-width: 768px) {
+        .sticky-note {
+            top: 80px;
+            right: 10px;
+            width: 150px;
+            transform: rotate(1deg);
+        }
+    }
+    
     .sticky-note::before {
         content: '';
         position: absolute;
@@ -251,7 +265,7 @@
     
     .sticky-content {
         padding: 15px;
-        color: #333;
+        color: #1a1a1a;
         font-size: 14px;
         line-height: 1.4;
     }
@@ -259,7 +273,7 @@
     .sticky-content h3 {
         margin: 0 0 10px 0;
         font-size: 16px;
-        color: #8b6f1a;
+        color: #5d4a1a;
         font-weight: normal;
     }
     

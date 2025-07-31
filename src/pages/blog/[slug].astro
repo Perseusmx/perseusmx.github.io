@@ -1,0 +1,372 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+    const posts = await getCollection('blog');
+    return posts.map(post => ({
+        params: { slug: post.slug },
+        props: { post }
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={`${post.data.title} - Digital Notes`}>
+    <script>
+        // Check for saved theme preference and apply it
+        if (typeof window !== 'undefined') {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-theme');
+            }
+        }
+    </script>
+    
+    <div class="blog-post-page">
+        <header class="blog-header">
+            <div class="header-content">
+                <a href="/blog" class="back-link">← Back to Notes</a>
+            </div>
+        </header>
+        
+        <main class="blog-main">
+            <div class="blog-container">
+                <article class="blog-post">
+                    <div class="post-header">
+                        <h1>{post.data.title}</h1>
+                        <div class="post-meta">
+                            <span class="date">{post.data.date.toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            })}</span>
+                            <div class="post-tags">
+                                {post.data.tags.map(tag => (
+                                    <span class="tag">#{tag}</span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="post-content">
+                        <Content />
+                    </div>
+                    
+                    <div class="post-footer">
+                        <a href="/blog" class="back-link">← Back to Notes</a>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
+</Layout>
+
+<style>
+    .blog-post-page {
+        background-color: var(--bg-color);
+        background-image: url('/images/ocean-wallpaper.webp');
+        /* Fallback for browsers that don't support WebP */
+        @supports not (background-image: url('/images/ocean-wallpaper.webp')) {
+            background-image: url('/images/ocean-wallpaper-optimized.png');
+        }
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: 'VT323', monospace;
+        color: var(--font-color);
+        padding-bottom: 100px;
+        min-height: 100vh;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        position: relative;
+    }
+    
+    .blog-post-page::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0);
+        transition: background 0.3s ease;
+        pointer-events: none;
+        z-index: 0;
+    }
+    
+    :global(.dark-theme) .blog-post-page::before {
+        background: rgba(0, 0, 0, 0.4);
+    }
+    
+    .blog-header {
+        background-color: rgba(var(--header-color-rgb), 0.95);
+        border-bottom: 3px solid var(--border-color);
+        padding: 12px 20px;
+        box-shadow: 0 4px 8px var(--shadow-color);
+        backdrop-filter: blur(2px);
+        transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    .back-link {
+        display: inline-block;
+        padding: 6px 14px;
+        background-color: rgba(var(--surface-color-rgb), 0.95);
+        border: 2px solid var(--border-color);
+        border-radius: 6px;
+        color: var(--font-color);
+        text-decoration: none;
+        font-family: 'VT323', monospace;
+        font-size: 0.9em;
+        transition: all 0.2s ease;
+        backdrop-filter: blur(2px);
+    }
+    
+    .back-link:hover {
+        background-color: rgba(0, 0, 0, 0.9);
+        color: var(--surface-color);
+        transform: translateY(-2px);
+    }
+    
+    .blog-main {
+        padding: 20px 20px 40px 20px;
+    }
+    
+    .blog-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .blog-post {
+        background-color: rgba(var(--surface-color-rgb), 0.95);
+        border: 3px solid var(--border-color);
+        border-radius: 8px;
+        padding: 40px;
+        box-shadow: 5px 5px 0 var(--shadow-color);
+        backdrop-filter: blur(2px);
+        transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        font-family: 'VT323', monospace;
+        line-height: 1.6;
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+    
+    .post-header {
+        margin-bottom: 30px;
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 20px;
+    }
+    
+    .post-header h1 {
+        color: var(--font-color);
+        margin: 0 0 15px 0;
+        font-size: 2em;
+        transition: color 0.3s ease;
+    }
+    
+    .post-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .date {
+        color: var(--font-color);
+        opacity: 0.7;
+        font-size: 0.9em;
+        transition: color 0.3s ease, opacity 0.3s ease;
+    }
+    
+    .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .tag {
+        background-color: var(--surface-color);
+        border: 1px solid var(--border-color);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        color: var(--font-color);
+    }
+    
+    .post-content {
+        color: var(--font-color);
+        line-height: 1.7;
+        padding-bottom: 40px;
+        transition: color 0.3s ease;
+        padding-right: 10px;
+    }
+    
+    /* Markdown content styling */
+    .post-content :global(h1) {
+        color: var(--font-color);
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 8px;
+        margin: 30px 0 20px 0;
+        font-size: 1.5em;
+    }
+    
+    .post-content :global(h2) {
+        color: var(--font-color);
+        margin: 25px 0 15px 0;
+        font-size: 1.3em;
+    }
+    
+    .post-content :global(h3) {
+        color: var(--font-color);
+        margin: 20px 0 10px 0;
+        font-size: 1.1em;
+    }
+    
+    .post-content :global(p) {
+        margin: 15px 0;
+    }
+    
+    .post-content :global(ul), .post-content :global(ol) {
+        margin: 15px 0;
+        padding-left: 20px;
+    }
+    
+    .post-content :global(li) {
+        margin: 8px 0;
+    }
+    
+    .post-content :global(blockquote) {
+        border-left: 4px solid var(--border-color);
+        padding-left: 15px;
+        margin: 20px 0;
+        font-style: italic;
+        color: var(--font-color);
+        opacity: 0.8;
+        transition: color 0.3s ease, opacity 0.3s ease;
+    }
+    
+    .post-content :global(code) {
+        background-color: var(--surface-color);
+        border: 1px solid var(--border-color);
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9em;
+    }
+    
+    .post-content :global(pre) {
+        background-color: var(--bg-color);
+        border: 2px solid var(--border-color);
+        padding: 15px;
+        border-radius: 6px;
+        overflow-x: auto;
+        margin: 20px 0;
+    }
+    
+    .post-content :global(pre code) {
+        background: none;
+        border: none;
+        padding: 0;
+        border-radius: 0;
+    }
+    
+    .post-content :global(strong) {
+        font-weight: bold;
+    }
+    
+    .post-content :global(em) {
+        font-style: italic;
+    }
+    
+    .post-content :global(a) {
+        color: #007acc;
+        text-decoration: underline;
+    }
+    
+    .post-content :global(a:hover) {
+        color: #005a9e;
+    }
+    
+    .post-content :global(hr) {
+        border: none;
+        border-top: 2px solid var(--border-color);
+        margin: 30px 0;
+    }
+    
+    .post-content :global(table) {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 20px 0;
+    }
+    
+    .post-content :global(th), .post-content :global(td) {
+        border: 1px solid var(--border-color);
+        padding: 8px 12px;
+        text-align: left;
+    }
+    
+    .post-content :global(th) {
+        background-color: var(--surface-color);
+        font-weight: bold;
+    }
+    
+    .post-footer {
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 2px solid var(--border-color);
+        transition: border-color 0.3s ease;
+        padding-bottom: 20px;
+    }
+    
+    /* Custom scrollbar for blog post */
+    .blog-post::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    .blog-post::-webkit-scrollbar-track {
+        background: var(--surface-color);
+        border-radius: 4px;
+    }
+    
+    .blog-post::-webkit-scrollbar-thumb {
+        background: var(--border-color);
+        border-radius: 4px;
+    }
+    
+    .blog-post::-webkit-scrollbar-thumb:hover {
+        background: #666;
+    }
+    
+    /* Mobile responsive adjustments */
+    @media (max-width: 768px) {
+        .blog-header {
+            padding: 8px 15px;
+        }
+        
+        .blog-post {
+            padding: 20px;
+        }
+        
+        .post-header h1 {
+            font-size: 1.6em;
+        }
+        
+        .post-meta {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .back-link {
+            padding: 5px 12px;
+            font-size: 0.8em;
+        }
+    }
+</style> 

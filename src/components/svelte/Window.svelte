@@ -19,9 +19,9 @@
         try {
             let iconPath = '';
             if (iconName === 'github') {
-                iconPath = '/node_modules/@hackernoon/pixel-icon-library/icons/SVG/brands/github.svg';
+                iconPath = '/icons/SVG/brands/github.svg';
             } else {
-                iconPath = `/node_modules/@hackernoon/pixel-icon-library/icons/SVG/regular/${iconName}.svg`;
+                iconPath = `/icons/SVG/regular/${iconName}.svg`;
             }
             
             const response = await fetch(iconPath);
@@ -35,35 +35,55 @@
     }
     
     function handleMouseDown(event) {
-        // Don't start dragging if clicking on window controls (i think this is a good idea)
+        // Don't start dragging if clicking on window controls
         if (event.target.closest('.window-controls')) return;
         
         isDragging = true;
         const rect = windowElement.getBoundingClientRect();
+        const clientX = event.touches ? event.touches[0].clientX : event.clientX;
+        const clientY = event.touches ? event.touches[0].clientY : event.clientY;
+        
         dragOffset = {
-            x: event.clientX - rect.left,
-            y: event.clientY - rect.top
+            x: clientX - rect.left,
+            y: clientY - rect.top
         };
         
         windowManager.focus(window.id);
         document.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseup', handleMouseUp);
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
+        document.addEventListener('touchend', handleTouchEnd);
     }
     
     function handleMouseMove(event) {
         if (!isDragging) return;
         
-        const newX = event.clientX - dragOffset.x;
-        const newY = event.clientY - dragOffset.y;
+        const clientX = event.touches ? event.touches[0].clientX : event.clientX;
+        const clientY = event.touches ? event.touches[0].clientY : event.clientY;
+        
+        const newX = clientX - dragOffset.x;
+        const newY = clientY - dragOffset.y;
         
         // Update window position in store
         windowManager.updatePosition(window.id, { x: newX, y: newY });
+    }
+    
+    function handleTouchMove(event) {
+        if (!isDragging) return;
+        event.preventDefault(); // Prevent scrolling while dragging
+        handleMouseMove(event);
     }
     
     function handleMouseUp() {
         isDragging = false;
         document.removeEventListener('mousemove', handleMouseMove);
         document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('touchmove', handleTouchMove);
+        document.removeEventListener('touchend', handleTouchEnd);
+    }
+    
+    function handleTouchEnd() {
+        handleMouseUp();
     }
     
     function closeWindow() {
@@ -85,6 +105,7 @@
     <div 
         class="title-bar" 
         on:mousedown={handleMouseDown}
+        on:touchstart={handleMouseDown}
         on:keydown={(e) => e.key === 'Enter' && handleMouseDown(e)}
         role="button"
         tabindex="0"
@@ -218,6 +239,33 @@
     .control-btn.close:hover {
         background-color: #ff4444;
         color: white;
+    }
+    
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+        .window {
+            min-width: 300px;
+            min-height: 200px;
+        }
+        
+        .title-bar {
+            padding: 8px 12px;
+            min-height: 44px; /* Better touch target */
+        }
+        
+        .control-btn {
+            width: 32px;
+            height: 32px;
+            font-size: 16px;
+        }
+        
+        .window-title {
+            font-size: 1em;
+        }
+        
+        .window-content {
+            height: calc(100% - 44px);
+        }
     }
     
     .window-content {
