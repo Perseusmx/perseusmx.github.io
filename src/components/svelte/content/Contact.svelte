@@ -1,6 +1,8 @@
 <script>
     // Contact stuff
     let iconCache = {};
+    let showToast = false;
+    let toastMessage = '';
     
     async function loadIcon(iconName) {
         if (iconCache[iconName]) {
@@ -10,9 +12,9 @@
         try {
             let iconPath = '';
             if (iconName === 'github') {
-                iconPath = '/node_modules/@hackernoon/pixel-icon-library/icons/SVG/brands/github.svg';
+                iconPath = '/icons/SVG/brands/github.svg';
             } else {
-                iconPath = `/node_modules/@hackernoon/pixel-icon-library/icons/SVG/regular/${iconName}.svg`;
+                iconPath = `/icons/SVG/regular/${iconName}.svg`;
             }
             
             const response = await fetch(iconPath);
@@ -37,8 +39,13 @@
     
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(() => {
-            // Could add a toast notification here
-            console.log('Copied to clipboard:', text);
+            toastMessage = `Copied: ${text}`;
+            showToast = true;
+            
+            // toast off after 3 secs
+            setTimeout(() => {
+                showToast = false;
+            }, 3000);
         });
     }
 </script>
@@ -115,6 +122,13 @@
         <p>Feel free to reach out, or just to say hello!</p>
     </div>
 </div>
+
+<!-- Toast Notification -->
+{#if showToast}
+    <div class="toast show">
+        {toastMessage}
+    </div>
+{/if}
 
 <style>
     .contact-content {
@@ -223,5 +237,26 @@
         font-size: 0.9em;
         color: var(--font-color);
         transition: color 0.3s ease;
+    }
+    
+    .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--surface-color);
+        border: 2px solid var(--border-color);
+        border-radius: 6px;
+        padding: 12px 16px;
+        font-family: 'VT323', monospace;
+        font-size: 0.9em;
+        color: var(--font-color);
+        box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .toast.show {
+        transform: translateX(0);
     }
 </style> 

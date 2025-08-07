@@ -17,9 +17,9 @@
             // Loads from brands first but just in case it doesn't work it has nasty emojis as fallback
             let iconPath = '';
             if (iconName === 'github') {
-                iconPath = '/node_modules/@hackernoon/pixel-icon-library/icons/SVG/brands/github.svg';
+                iconPath = '/icons/SVG/brands/github.svg';
             } else {
-                iconPath = `/node_modules/@hackernoon/pixel-icon-library/icons/SVG/regular/${iconName}.svg`;
+                iconPath = `/icons/SVG/regular/${iconName}.svg`;
             }
             
             const response = await fetch(iconPath);
@@ -47,10 +47,7 @@
     function openApp(app) {
         if (app.id === 'Github') {
             // Redirect to GitHub
-            window.open('https://github.com/yourusername', '_blank');
-        } else if (app.id === 'Notes') {
-            // Navigate to blog page
-            window.location.href = '/blog';
+            window.open('https://github.com/perseusmx', '_blank');
         } else {
             windowManager.open(app);
         }
@@ -103,7 +100,7 @@
         border-right: 3px outset var(--border-color);
         border-bottom: none;
         border-radius: 8px 8px 0 0;
-        padding: 8px 20px 12px 20px;
+        padding: 8px 20px 4px 20px;
         box-shadow: 
             inset 2px 2px 4px rgba(255, 255, 255, 0.8),
             inset -2px -2px 4px rgba(0, 0, 0, 0.3),
@@ -145,8 +142,8 @@
     }
     
     .dock-icon {
-        width: 60px;
-        height: 60px;
+        width: 54px;
+        height: 54px;
         background: var(--surface-color);
         border: 2px outset var(--border-color);
         border-radius: 4px;
@@ -193,8 +190,8 @@
     }
     
     .dock-icon :global(svg) {
-        width: 32px;
-        height: 32px;
+        width: 29px;
+        height: 29px;
         fill: var(--font-color);
         position: relative;
         z-index: 2;
@@ -213,7 +210,7 @@
         transform: translateY(10px);
         transition: all 0.2s ease;
         position: absolute;
-        bottom: 80px;
+        bottom: 74px;
         left: 50%;
         transform: translateX(-50%) translateY(10px);
         box-shadow: 

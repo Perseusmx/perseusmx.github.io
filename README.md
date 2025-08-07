@@ -1,79 +1,86 @@
 # PerseusPage - Retro Portfolio
 
-A personal portfolio website with a retro computer aesthetic, featuring a Kali Linux-style terminal, interactive blog, and macOS-style desktop environment.
+My personal portfolio website with a retro computer vibe. Think old-school terminal meets modern web design, but actually usable.
 
-## 🎨 Features
+![Astro](https://img.shields.io/badge/Astro-FF5D01?style=for-the-badge&logo=astro&logoColor=white)
+![Svelte](https://img.shields.io/badge/Svelte-FF3E00?style=for-the-badge&logo=svelte&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
-- **Retro Computer Aesthetic**: Kali Linux-inspired design with terminal themes
-- **Interactive Terminal**: Fully functional terminal with 20+ commands
-- **Blog System**: Markdown-based blog with multiple posts (PLACEHOLDERS )
-- **Theme System**: 5 different terminal themes (Dracula, Solarized, One Dark, Material Ocean, Gruvbox)
-- **Window Management**: Draggable windows with title bars and control buttons
-- **Responsive Design**: Works on desktop and mobile devices
-- **Smooth Animations**: CSS transitions and hover effects throughout
+## What's This About?
 
-## 🛠️ Tech Stack
+Basically, I got tired of boring portfolio sites and decided to build something that looks cool. It's got a retro computer aesthetic with a boot screen, desktop environment, and terminal - but it's actually functional and not just for show.
 
-- **Framework**: [Astro](https://astro.build/) - Static site generator
-- **UI Components**: [Svelte](https://svelte.dev/) - Reactive JavaScript framework
-- **Styling**: Custom CSS with CSS variables for theming
-- **Font**: VT323 monospace font for authentic retro feel
-- **Markdown**: Blog posts written in Markdown
+## Cool Stuff It Does
 
-## 📁 Project Structure
+- **Boot Screen**: Yeah, it actually boots up like an old computer. With clouds, waves, and fake error messages for authenticity
+- **Desktop Environment**: macOS-style windows you can drag around, dock at the bottom, the whole deal
+- **Interactive Terminal**: Real terminal with commands and stuff. Not just a fake one
+- **Theme System**: Dark/light mode that actually works and looks good
+- **Responsive**: Works on your phone too, not just desktop
+- **About Page**: Auto-opens when you load the site (because why not?)
+
+## Tech Stuff
+
+- **Astro** - Because static sites are fast and I'm lazy
+- **Svelte** - For the interactive bits that actually need to be interactive
+- **Custom CSS** - Because I wanted it to look exactly how I wanted
+- **VT323 Font** - That old terminal font that makes everything look legit
+
+## Project Structure
 
 ```
 src/
 ├── components/
 │   ├── svelte/
-│   │   ├── Desktop.svelte          # Main desktop container
-│   │   ├── Window.svelte           # Draggable window component
-│   │   ├── Dock.svelte             # macOS-style dock navigation
+│   │   ├── App.svelte              # Main app wrapper
+│   │   ├── BootScreen.svelte       # The boot screen
+│   │   ├── Desktop.svelte          # Desktop environment
+│   │   ├── Window.svelte           # Draggable windows
+│   │   ├── Dock.svelte             # Bottom dock
 │   │   └── content/
-│   │       ├── About.svelte        # About page content
-│   │       ├── BlogPost.svelte     # Blog post viewer
-│   │       ├── Contact.svelte      # Contact information
-│   │       ├── Notes.svelte        # Blog listing
-│   │       ├── SnakeGame.svelte    # Retro Snake game
+│   │       ├── About.svelte        # About page
+│   │       ├── Contact.svelte      # Contact form
 │   │       └── Terminal.svelte     # Interactive terminal
-│   └── store.js                    # Svelte store for window management
-├── content/
-│   └── blog/                       # Markdown blog posts
+│   └── store.js                    # Window management
 ├── layouts/
-│   └── Layout.astro               # Main layout with fonts and styles
+│   └── Layout.astro               # Main layout
 ├── pages/
-│   ├── index.astro                # Home page
-│   └── api/                       # Blog API endpoints
+│   └── index.astro                # Home page
 └── styles/
-    └── global.css                 # Global styles and CSS variables
+    └── global.css                 # Global styles
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
-- Node.js (version 16 or higher)
-- npm or yarn
+- Node.js (16 or higher)
+- npm (or yarn if you're fancy)
 
 ### Installation
 
-1. Clone the repository:
+1. Clone it:
 ```bash
 git clone <repository-url>
 cd PerseusPage
 ```
 
-2. Install dependencies:
+2. Install stuff:
 ```bash
 npm install
 ```
 
-3. Start the development server:
+3. Run it:
 ```bash
 npm run dev
 ```
 
-4. Open your browser and navigate to `http://localhost:4321`
+4. Open `http://localhost:4321` in your browser
 
 ### Build for Production
 
@@ -81,117 +88,67 @@ npm run dev
 npm run build
 ```
 
-### Preview Production Build
+## Features Breakdown
 
-```bash
-npm run preview
-```
+### Boot Screen
+- Shows a realistic boot sequence with fake system messages
+- Has floating clouds and ocean waves (because summer vibes)
+- Includes error simulation and rare easter egg messages
+- Takes about 15-20 seconds to complete (might reconsider if this is actually smart to keep)
 
-## 🎯 Usage
+### Desktop Environment
+- macOS-style window management
+- Draggable windows with proper title bars
+- Dock at the bottom with app icons
+- System tray with time and theme toggle
 
-### Navigation
+### Terminal
+- Real interactive terminal with commands
+- Multiple themes (Dracula, Solarized, etc.)
+- Virtual file system for fun
+- Actually responds to commands
 
-- **Dock**: Click on any icon in the bottom dock to open the corresponding application
-- **Windows**: Drag windows by their title bars to reposition them
-- **Window Controls**: Use the minimize (−) and close (×) buttons in window title bars
+### About Page
+- Auto-opens when the site loads
+- Shows my info in a JSON-like format
+- Typing animations and hover effects
+- Contact links and social stuff
 
-### Applications
+## Why I Built It This Way
 
-1. **About Me** (👤): Personal information and contact details
-2. **Notes** (📝): Blog posts and articles
-3. **Contact** (📧): Contact information and social links
-4. **Terminal** (💻): Interactive Kali Linux-style terminal
-5. **Snake Game** (🎮): Classic arcade game
+Looks cool.
 
-### Terminal Commands
+## Development Notes
 
-The terminal includes 20+ commands:
-- **System**: `whoami`, `pwd`, `ls`, `cd`, `uname`, `date`, `uptime`, `top`, `ifconfig`
-- **Security**: `nmap`, `whois`, `dig`, `ping`, `netstat`, `ps`
-- **File Operations**: `cat`, `history`, `clear`
-- **Fun**: `echo`, `neofetch`, `fortune`, `cowsay`
-- **Themes**: `theme` - Cycle through 5 terminal themes
+- The boot screen uses CSS animations for the clouds and waves
+- Window management is handled through Svelte stores
+- Theme system uses CSS variables for easy customization
+- Everything is responsive because mobile users exist
 
-## 🎨 Customization
+## Future Ideas
 
-### Terminal Themes
+- Maybe add more apps to the desktop
+- Could add sound effects (but probably won't)
+- Might add more terminal commands
+- Could integrate with real APIs for weather/time
 
-The terminal supports 5 different themes:
-- **Dracula**: Deep purple with bright green prompts
-- **Solarized Dark**: Dark blue-gray with muted colors
-- **One Dark**: Dark gray with vibrant accents
-- **Material Ocean**: Deep blue with material design colors
-- **Gruvbox Dark**: Warm dark theme with muted colors
+## License
 
-### Colors
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-The color scheme is defined in `src/styles/global.css` using CSS variables:
+## Credits & Inspiration
 
-```css
-:root {
-    --bg-color: #d8d0c8;        /* Background beige */
-    --surface-color: #ffffff;    /* Window backgrounds */
-    --border-color: #000000;     /* Borders and text */
-    --font-color: #000000;       /* Text color */
-    --shadow-color: rgba(0, 0, 0, 0.5); /* Shadows */
-    --dock-bg-color: rgba(255, 255, 255, 0.5); /* Dock background */
-}
-```
-
-### Adding New Applications
-
-1. Create a new Svelte component in `src/components/svelte/content/`
-2. Add the app definition to `src/components/store.js`:
-
-```javascript
-export const APPS = readable([
-    // ... existing apps
-    { id: 'NewApp', title: 'New App', icon: '🆕' },
-]);
-```
-
-3. Import and add the component to the components object:
-
-```javascript
-import NewApp from './svelte/content/NewApp.svelte';
-const components = { About, Notes, Contact, Terminal, SnakeGame, NewApp };
-```
-
-## 📱 Responsive Design
-
-The application is fully responsive and includes:
-- Mobile-optimized dock sizing
-- Touch-friendly interactions
-- Responsive window layouts
-- Adaptive typography
-
-## 🎵 Retro Computer Inspiration
-
-This project captures the nostalgic feel of early computing with:
-
-- Kali Linux terminal aesthetic
-- Retro computer color schemes
-- Monospace typography
-- Bordered windows and controls
-- Classic terminal commands
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📞 Contact
-
-For questions or feedback, please open an issue on GitHub.
-
-## 🙏 Credits
-
+### Design Inspiration
 - **Poolsuite.fm** - Original inspiration for the retro aesthetic and design philosophy
-- **VT323 Font** - Monospace font by Peter Wiegel for authentic terminal feel
 - **Kali Linux** - Terminal aesthetic and command inspiration
+- **macOS** - Window management and dock design patterns
+
+### Resources Used
+- **VT323 Font** - Monospace font by Peter Wiegel for authentic terminal feel
 - **Gogh Themes** - Terminal color scheme inspiration from [Gogh](https://gogh-co.github.io/Gogh/)
 - **Icons** - [@hackernoon/pixel-icon-library](https://www.npmjs.com/package/@hackernoon/pixel-icon-library) - Pixel art icons used throughout the interface
-- **Wallpaper** - [D3Ext/aesthetic-wallpapers](https://github.com/D3Ext/aesthetic-wallpapers) - Ocean wallpaper background image
+- **Wallpaper** - Ocean wallpaper background image
+
+
+
+

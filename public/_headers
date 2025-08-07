@@ -1,0 +1,23 @@
+# Cache static assets for 1 year
+/_astro/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/_astro/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/public/icons/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache HTML for shorter time to allow updates
+/*.html
+  Cache-Control: public, max-age=3600
+
+# Cache API responses for a reasonable time
+/api/*
+  Cache-Control: public, max-age=300 

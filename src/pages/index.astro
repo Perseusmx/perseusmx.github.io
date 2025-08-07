@@ -1,10 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Desktop from '../components/svelte/Desktop.svelte';
+import App from '../components/svelte/App.svelte';
 ---
 
 <Layout title="Welcome">
 	<main>
-		<Desktop client:only="svelte" />
+		<App client:only="svelte" />
 	</main>
 </Layout>

@@ -142,15 +142,86 @@
     }
   }
   
+  // Email corruption effect
+  let emailElement;
+  let corruptionInterval;
+  
+  // Corruption characters
+  const corruptionChars = ['X', 'Y', 'Z', '[', ']', '{', '}', '@', '#', '$', '%', '&', '*', '!', '?', '~', '^', '|', '\\', '/', '+', '=', '<', '>', ';', ':', '"', "'", '`'];
+  
+  function startEmailCorruption() {
+    if (!emailElement) return;
+    
+    const originalText = emailElement.getAttribute('data-original');
+    
+    corruptionInterval = setInterval(() => {
+      // Corrupt 3-6 characters for more visible effect
+      const numToCorrupt = Math.floor(Math.random() * 4) + 3;
+      const positions = [];
+      
+      // Get random positions
+      for (let i = 0; i < numToCorrupt; i++) {
+        const pos = Math.floor(Math.random() * originalText.length);
+        if (!positions.includes(pos)) {
+          positions.push(pos);
+        }
+      }
+      
+      // Create corrupted version
+      const corruptedText = originalText.split('');
+      positions.forEach(pos => {
+        const randomChar = corruptionChars[Math.floor(Math.random() * corruptionChars.length)];
+        corruptedText[pos] = randomChar;
+      });
+      
+      emailElement.textContent = corruptedText.join('');
+      
+      // Reset after a longer delay for more visibility
+      setTimeout(() => {
+        emailElement.textContent = originalText;
+      }, 500);
+      
+    }, 2000); // Corrupt every 2 seconds
+  }
+  
+  function stopEmailCorruption() {
+    if (corruptionInterval) {
+      clearInterval(corruptionInterval);
+      if (emailElement) {
+        emailElement.textContent = emailElement.getAttribute('data-original');
+      }
+    }
+  }
+  
   onMount(() => {
     if (focusElement) animateFocus();
     if (techElement) animateTech();
+    
+    // Start email corruption after a delay
+    setTimeout(() => {
+      emailElement = document.querySelector('.corrupted-email');
+      if (emailElement) {
+        startEmailCorruption();
+      } else {
+        // Try again after a bit more delay
+        setTimeout(() => {
+          emailElement = document.querySelector('.corrupted-email');
+          if (emailElement) {
+            startEmailCorruption();
+          }
+        }, 1000);
+      }
+    }, 2000);
+    
+    return () => {
+      stopEmailCorruption();
+    };
   });
 </script>
 
 <div class="about-content">
   <header class="page-header">
-    <h1 class="visually-hidden">Perseus Blog</h1>
+    <h1 class="visually-hidden">Perseus Portfolio</h1>
   </header>
 
   <div class="intro-text">
@@ -202,7 +273,7 @@
       "<span class="key">Contact</span>": [
       <p class="ms">
         "<span class="key">Email</span>":
-        "<a class="value obfuscated-email" href="mailto:p3rseus@mailbox.org" target="_self">p3rseus[at]mailbox[dot]org</a>",
+        "<a class="value obfuscated-email corrupted-email" href="mailto:p3rseus@mailbox.org" target="_self" data-original="p3rseus[at]mailbox[dot]org">p3rseus[at]mailbox[dot]org</a>",
       </p>
       <p class="ms">
         "<span class="key">GitHub</span>":
@@ -366,5 +437,9 @@
   
   p.ms {
     margin: 5px 0;
+  }
+  
+  .corrupted-email {
+    transition: color 0.1s ease;
   }
 </style> 
