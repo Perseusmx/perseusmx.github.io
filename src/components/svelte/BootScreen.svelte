@@ -53,9 +53,9 @@
                 isTyping = true;
                 
                 // Check if this is an error/warning message
-                let messageDelay = 600;
+                let messageDelay = 300;
                 if (currentMessage.includes('[ ERROR ]') || currentMessage.includes('[ WARN ]')) {
-                    messageDelay = 1000; // Longer delay for errors
+                    messageDelay = 500; // Longer delay for errors
                 }
                 
                 // Simulate typing effect
@@ -80,10 +80,10 @@
                     bootComplete = true;
                     setTimeout(() => {
                         dispatch('bootComplete');
-                    }, 1500); // Longer delay to show "System Ready" message
-                }, 1000); // Extra delay before starting completion
+                    }, 800); // Shorter delay to show "System Ready" message
+                }, 500); // Shorter delay before starting completion
             }
-        }, 800);
+        }, 400);
     }
     
     // Cursor blink effect
@@ -97,6 +97,9 @@
     <div class="cloud cloud-1">☁️</div>
     <div class="cloud cloud-2">☁️</div>
     <div class="cloud cloud-3">☁️</div>
+    <div class="cloud cloud-4">☁️</div>
+    <div class="cloud cloud-5">☁️</div>
+    <div class="cloud cloud-6">☁️</div>
     
     <!-- Ocean Waves -->
     <div class="wave wave-1"></div>
@@ -374,23 +377,50 @@
     }
     
     .cloud-1 {
-        top: 20%;
-        left: -100px;
-        animation: float1 25s linear infinite;
+        top: 15%;
+        left: 0;
+        animation: float1 35s linear infinite;
+        will-change: transform;
     }
     
     .cloud-2 {
-        top: 40%;
-        left: -150px;
-        animation: float2 30s linear infinite;
-        animation-delay: 5s;
+        top: 35%;
+        left: -20%;
+        animation: float2 40s linear infinite;
+        animation-delay: 2s;
+        will-change: transform;
     }
     
     .cloud-3 {
-        top: 60%;
-        left: -120px;
-        animation: float3 35s linear infinite;
+        top: 55%;
+        left: -10%;
+        animation: float3 38s linear infinite;
+        animation-delay: 4s;
+        will-change: transform;
+    }
+
+    .cloud-4 {
+        top: 25%;
+        left: -15%;
+        animation: float1 42s linear infinite;
+        animation-delay: 6s;
+        will-change: transform;
+    }
+
+    .cloud-5 {
+        top: 45%;
+        left: -5%;
+        animation: float2 36s linear infinite;
+        animation-delay: 8s;
+        will-change: transform;
+    }
+
+    .cloud-6 {
+        top: 65%;
+        left: -25%;
+        animation: float3 45s linear infinite;
         animation-delay: 10s;
+        will-change: transform;
     }
     
     /* Ocean Waves */
@@ -402,43 +432,45 @@
         height: 150px;
         background: linear-gradient(45deg, transparent 20%, rgba(135, 206, 235, 0.8) 50%, transparent 80%);
         border-radius: 50% 50% 0 0;
-        animation: wave 4s ease-in-out infinite;
+        animation: wave 5s ease-in-out infinite;
         pointer-events: none;
         z-index: 1;
-        box-shadow: 0 0 20px rgba(135, 206, 235, 0.5);
+        box-shadow: 0 0 15px rgba(135, 206, 235, 0.4);
+        will-change: transform;
+        transform: translateZ(0);
     }
     
     .wave-1 {
         animation-delay: 0s;
-        opacity: 0.9;
+        opacity: 0.8;
         height: 180px;
     }
     
     .wave-2 {
-        animation-delay: 1.5s;
-        opacity: 0.7;
+        animation-delay: 1s;
+        opacity: 0.6;
         height: 140px;
     }
     
     .wave-3 {
-        animation-delay: 3s;
-        opacity: 0.5;
+        animation-delay: 2s;
+        opacity: 0.4;
         height: 120px;
     }
     
     @keyframes float1 {
-        0% { transform: translateX(-100px); }
-        100% { transform: translateX(calc(100vw + 100px)); }
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(100vw + 50px)); }
     }
     
     @keyframes float2 {
-        0% { transform: translateX(-150px); }
-        100% { transform: translateX(calc(100vw + 150px)); }
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(100vw + 50px)); }
     }
     
     @keyframes float3 {
-        0% { transform: translateX(-120px); }
-        100% { transform: translateX(calc(100vw + 120px)); }
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(100vw + 50px)); }
     }
     
     @keyframes wave {
@@ -449,36 +481,104 @@
     /* Responsive design */
     @media (max-width: 768px) {
         .boot-content {
-            padding: 20px;
-            width: 95%;
+            padding: 15px;
+            width: 92%;
+            margin: 10px;
         }
         
         .boot-header h1 {
-            font-size: 2em;
+            font-size: 1.8em;
         }
         
-        .boot-message {
+        .boot-header p {
             font-size: 1em;
         }
         
-        .cloud {
-            font-size: 2em;
+        .boot-message {
+            font-size: 0.9em;
         }
         
+        .boot-messages {
+            height: 160px;
+            margin-bottom: 20px;
+        }
+        
+        .palm-logo {
+            font-size: 3em;
+            margin: 0 0 10px 0;
+        }
+        
+        /* Optimize clouds for mobile */
+        .cloud {
+            font-size: 2em;
+            opacity: 0.6;
+        }
+        
+        .cloud-1 {
+            top: 8%;
+            left: -10%;
+        }
+        
+        .cloud-2 {
+            top: 22%;
+            left: -5%;
+        }
+        
+        .cloud-3 {
+            top: 36%;
+            left: -15%;
+        }
+
+        .cloud-4 {
+            top: 50%;
+            left: -8%;
+        }
+
+        .cloud-5 {
+            top: 64%;
+            left: -12%;
+        }
+
+        .cloud-6 {
+            top: 78%;
+            left: -6%;
+        }
+        
+        /* Optimize waves for mobile */
         .wave {
-            height: 80px;
+            height: 50px;
+            opacity: 0.6;
         }
         
         .wave-1 {
-            height: 100px;
+            height: 60px;
+            bottom: -10px;
         }
         
         .wave-2 {
-            height: 80px;
+            height: 45px;
+            bottom: -8px;
         }
         
         .wave-3 {
-            height: 60px;
+            height: 35px;
+            bottom: -5px;
+        }
+        
+        .progress-bar {
+            height: 15px;
+        }
+        
+        .progress-text {
+            font-size: 0.9em;
+        }
+        
+        .complete-message h2 {
+            font-size: 1.6em;
+        }
+        
+        .complete-message p {
+            font-size: 1em;
         }
     }
 </style>
